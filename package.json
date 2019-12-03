@@ -1,0 +1,17 @@
+{
+	"name": "pocket-therabuddy",
+	"version": "1.0.0",
+	"description": "Pocket-sized Mental Health Support",
+	"main": "index.js",
+	"author": "Oliver L Coley",
+	"license": "MIT",
+	"dependencies": {
+		"@graphql-modules/core": "^0.7.13",
+		"@graphql-modules/di": "^0.7.13",
+		"apollo-server": "^2.9.12",
+		"apollo-server-express": "^2.9.12",
+		"express": "^4.17.1",
+		"graphql": "^14.5.8",
+		"typeorm": "^0.2.20"
+	}
+}
