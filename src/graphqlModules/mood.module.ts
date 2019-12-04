@@ -1,4 +1,5 @@
 import { GraphQLModule, ModuleContext } from "@graphql-modules/core";
+import { MoodProvider } from "./mood.provider";
 const gql = require("graphql-tag");
 
 const typeDefs = gql`
@@ -17,7 +18,15 @@ const typeDefs = gql`
 `;
 
 const MoodModule = new GraphQLModule({
-	typeDefs
+	typeDefs,
+	resolvers: {
+		Query: {
+			moods: (root, args, { injector }: ModuleContext) =>
+				injector.get(MoodProvider).getMoods(),
+			mood: (root, { name }, { injector }: ModuleContext) =>
+				injector.get(MoodProvider).getMoodByName(name)
+		}
+	}
 });
 
 module.exports = MoodModule;

@@ -1,36 +1,27 @@
+import { getConnection } from "typeorm";
 import { Injectable } from "@graphql-modules/di";
+import { Mood } from "../models/Mood.entity";
 
-// import { getConnection } from "typeorm";
-// import { Investment } from "../models/Investment.entity.solutions";
+@Injectable()
+export class MoodProvider {
+	mood: Mood;
 
-// @Injectable()
-// export class InvestmentProvider {
-// 	investment: Investment;
+	async getMoods() {
+		return await getConnection("pocketTherabuddy")
+			.getRepository(Mood)
+			.createQueryBuilder()
+			.getMany();
+	}
 
-// 	async getInvestments() {
-// 		return await getConnection("Diligence")
-// 			.getRepository(Investment)
-// 			.find({ take: 50 });
-// 	}
+	async getMoodById(id) {
+		return await getConnection("pocketTherabuddy")
+			.getRepository(Mood)
+			.findOne(id);
+	}
 
-// 	async getInvestmentById(id) {
-// 		return await getConnection("Diligence")
-// 			.getRepository(Investment)
-// 			.findOne(id);
-// 	}
-
-// 	async addInvestment(input) {
-// 		const repository = await getConnection("Diligence").getRepository(
-// 			Investment
-// 		);
-// 		const investment = repository.create({ ...input });
-// 		return repository.save(investment);
-// 	}
-
-// 	async updateInvestment(id, input) {
-// 		const repository = await getConnection("Diligence").getRepository(
-// 			Investment
-// 		);
-// 		return repository.update(id, { ...input });
-// 	}
-// }
+	async getMoodByName(name) {
+		return await getConnection("pocketTherabuddy")
+			.getRepository(Mood)
+			.findOne({ where: { name: name } });
+	}
+}

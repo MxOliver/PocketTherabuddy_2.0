@@ -7,7 +7,7 @@
 		},
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
-		"types": ["node"],
+		"types": ["node", "jest", "jest-extended"],
 		"allowJs": true,
 		"target": "es2016",
 		"module": "commonjs",
@@ -15,6 +15,6 @@
 		"sourceMap": true,
 		"outDir": "./dist"
 	},
-	"include": ["src/**/*.ts"],
+	"include": ["src/**/*.ts", "node_modules/jest-extended/types/**/*.d.ts"],
 	"exclude": ["node_modules"]
 }

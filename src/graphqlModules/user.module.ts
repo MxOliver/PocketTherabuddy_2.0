@@ -1,4 +1,5 @@
 import { GraphQLModule, ModuleContext } from "@graphql-modules/core";
+import { UserProvider } from "./user.provider";
 const gql = require("graphql-tag");
 
 const typeDefs = gql`
@@ -15,7 +16,15 @@ const typeDefs = gql`
 `;
 
 const UserModule = new GraphQLModule({
-	typeDefs
+	typeDefs,
+	resolvers: {
+		Query: {
+			users: (root, args, { injector }: ModuleContext) =>
+				injector.get(UserProvider).getUsers(),
+			user: (root, { id }, { injector }: ModuleContext) =>
+				injector.get(UserProvider).getUserById(id)
+		}
+	}
 });
 
 module.exports = UserModule;
