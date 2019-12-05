@@ -1,60 +1,60 @@
 import { getConnection } from "typeorm";
 import { Injectable } from "@graphql-modules/di";
-import { Mood } from "../models/Mood.entity";
+import { Habit } from "../models/Habit.entity";
 
 @Injectable()
-export class MoodProvider {
-	mood: Mood;
+export class HabitProvider {
+	habit: Habit;
 
-	async getMoods() {
+	async getHabits() {
 		return await getConnection("pocketTherabuddy")
-			.getRepository(Mood)
+			.getRepository(Habit)
 			.createQueryBuilder()
 			.getMany();
 	}
 
-	async getMoodById(id) {
+	async getHabitById(id) {
 		return await getConnection("pocketTherabuddy")
-			.getRepository(Mood)
+			.getRepository(Habit)
 			.findOne(id);
 	}
 
-	async getMoodByName(name) {
+	async getHabitByName(name) {
 		return await getConnection("pocketTherabuddy")
-			.getRepository(Mood)
+			.getRepository(Habit)
 			.findOne({ where: { name: name } });
 	}
 
-	async getMoodByUser(id) {
+	async getHabitsByUser(id) {
 		return await getConnection("pocketTherabuddy")
-			.getRepository(Mood)
+			.getRepository(Habit)
 			.findOne({ where: { userId: id } });
 	}
 
-	async createMood(userId, input) {
+	async createHabit(userId, input) {
 		const repository = await getConnection("pocketTherabuddy").getRepository(
-			Mood
+			Habit
 		);
-		const mood = repository.create({ ...input, userId: userId });
+		const habit = repository.create({ ...input, userId: userId });
 
-		return repository.save(mood);
+		return repository.save(habit);
 	}
 
-	async updateMood(id, input) {
+	async updateHabit(id, input) {
 		const repository = await getConnection("pocketTherabuddy").getRepository(
-			Mood
+			Habit
 		);
 
 		return repository.update(id, input);
 	}
 
-	async deleteMood(id, userId) {
-		const mood = await getConnection("pocketTherabuddy")
-			.getRepository(Mood)
+	async deleteHabit(id, userId) {
+		const habit = await getConnection("pocketTherabuddy")
+			.getRepository(Habit)
 			.findOne({ where: { id: id, userId: userId } });
 
 		return await getConnection("pocketTherabuddy")
-			.getRepository(Mood)
-			.remove(mood);
+			.getRepository(Habit)
+			.remove(habit);
 	}
 }

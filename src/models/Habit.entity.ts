@@ -9,7 +9,7 @@ import {
 import { User } from "./User.entity";
 
 @Entity()
-export class Mood {
+export class Habit {
 	@PrimaryGeneratedColumn()
 	id: string;
 
@@ -17,11 +17,11 @@ export class Mood {
 	name: string;
 
 	@Column()
-	intensity: number;
+	duration: number;
 
 	@ManyToOne(
 		type => User,
-		user => user.moods
+		user => user.habits
 	)
 	user: User;
 

@@ -9,19 +9,16 @@ import {
 import { User } from "./User.entity";
 
 @Entity()
-export class Mood {
+export class Skill {
 	@PrimaryGeneratedColumn()
 	id: string;
 
 	@Column()
 	name: string;
 
-	@Column()
-	intensity: number;
-
 	@ManyToOne(
 		type => User,
-		user => user.moods
+		user => user.skills
 	)
 	user: User;
 

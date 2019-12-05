@@ -7,11 +7,13 @@ import {
 	OneToMany
 } from "typeorm";
 import { Mood } from "./Mood.entity";
+import { Habit } from "./Habit.entity";
+import { Skill } from "./Skill.entity";
 
 @Entity()
 export class User {
 	@PrimaryGeneratedColumn()
-	id: number;
+	id: string;
 
 	@Column()
 	name: string;
@@ -27,6 +29,18 @@ export class User {
 		mood => mood.user
 	)
 	moods: [Mood];
+
+	@OneToMany(
+		type => Habit,
+		habit => habit.user
+	)
+	habits: [Habit];
+
+	@OneToMany(
+		type => Skill,
+		skill => skill.user
+	)
+	skills: [Skill];
 
 	@CreateDateColumn()
 	createdDate: Date;
