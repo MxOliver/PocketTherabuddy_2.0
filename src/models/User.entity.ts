@@ -10,7 +10,7 @@ import { Mood } from "./Mood.entity";
 import { Habit } from "./Habit.entity";
 import { Skill } from "./Skill.entity";
 
-@Entity()
+@Entity({ name: "users" })
 export class User {
 	@PrimaryGeneratedColumn()
 	id: string;
@@ -42,9 +42,9 @@ export class User {
 	)
 	skills: [Skill];
 
-	@CreateDateColumn()
+	@CreateDateColumn({ name: "created_at_utc" })
 	createdDate: Date;
 
-	@UpdateDateColumn()
+	@UpdateDateColumn({ name: "updated_at_utc" })
 	updatedDate: Date;
 }

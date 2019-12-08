@@ -3,6 +3,52 @@ import { MoodProvider } from "./mood.provider";
 const gql = require("graphql-tag");
 
 const typeDefs = gql`
+	enum MoodType {
+		AFRAID
+		AGGRAVATED
+		ANGRY
+		ANXIOUS
+		ASHAMED
+		ASSERTIVE
+		BRAVE
+		CALM
+		CAUTIOUS
+		CHEERFUL
+		COMFORTED
+		CONTENTED
+		CURIOUS
+		DEPRESSED
+		EMBARRASSED
+		ENERGIZED
+		ENVIOUS
+		EXCITED
+		FURIOUS
+		GUILTY
+		GRUMPY
+		HAPPY
+		HOPEFUL
+		HUMILIATED
+		HURT
+		INDIFFERENT
+		INSECURE
+		IRRITATED
+		LONELY
+		LOVED
+		MAD
+		OPTIMISTIC
+		OVERWHELMED
+		PANICKED
+		PEACEFUL
+		POSITIVE
+		PROUD
+		RESTLESS
+		REGRETFUL
+		RELIEVED
+		SAD
+		SHAMEFUL
+		SKEPTICAL
+		WORRIED
+	}
 	type Query {
 		moods: [Mood]
 		mood(name: String): Mood
@@ -10,14 +56,15 @@ const typeDefs = gql`
 	}
 	type Mood {
 		id: String
-		name: String!
+		type: MoodType
 		userId: Int
 		intensity: Int
 		createDate: String
 		updateDate: String
+		moodEnumId: Int
 	}
 	input MoodInput {
-		name: String!
+		type: MoodType
 		userId: Int
 		intensity: Int
 		createDate: String
