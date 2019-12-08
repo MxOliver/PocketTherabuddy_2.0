@@ -7,11 +7,13 @@ import {
 	OneToMany
 } from "typeorm";
 import { Mood } from "./Mood.entity";
+import { Habit } from "./Habit.entity";
+import { Skill } from "./Skill.entity";
 
-@Entity()
+@Entity({ name: "users" })
 export class User {
-	@PrimaryGeneratedColumn()
-	id: number;
+	@PrimaryGeneratedColumn("uuid")
+	id: string;
 
 	@Column()
 	name: string;
@@ -28,9 +30,21 @@ export class User {
 	)
 	moods: [Mood];
 
-	@CreateDateColumn()
-	createdDate: Date;
+	@OneToMany(
+		type => Habit,
+		habit => habit.user
+	)
+	habits: [Habit];
 
-	@UpdateDateColumn()
-	updatedDate: Date;
+	@OneToMany(
+		type => Skill,
+		skill => skill.user
+	)
+	skills: [Skill];
+
+	@Column({ name: "created_at_utc", type: "timestamp" })
+	createdDate: string;
+
+	@Column({ name: "updated_at_utc", type: "timestamp" })
+	updatedDate: string;
 }

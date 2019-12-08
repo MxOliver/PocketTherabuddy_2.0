@@ -1,20 +1,22 @@
 import { ApolloServer } from "apollo-server-express";
+import { createConnection } from "typeorm";
 const express = require("express");
+const ormConfig = require("../ormconfig.js");
 const AppModules = require("./graphqlModules");
 const PORT = 3000;
-
-const { schema, context } = AppModules;
 
 const app = express();
 
 const server = new ApolloServer({
-	schema,
-	context,
-	introspection: true
+	modules: [AppModules],
+	introspection: true,
+	playground: true,
+	debug: true
 });
 
 server.applyMiddleware({ app });
-
-app.listen({ PORT }, () => {
-	console.log(`server ready at ${PORT}`);
+createConnection(ormConfig).then(() => {
+	app.listen({ port: PORT }, () => {
+		console.log(`server ready at ${PORT}`);
+	});
 });

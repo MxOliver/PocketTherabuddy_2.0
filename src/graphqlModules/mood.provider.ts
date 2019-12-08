@@ -1,36 +1,83 @@
+import { getConnection } from "typeorm";
 import { Injectable } from "@graphql-modules/di";
+import { Mood } from "../models/Mood.entity";
+import { uuid } from "uuidv4";
 
-// import { getConnection } from "typeorm";
-// import { Investment } from "../models/Investment.entity.solutions";
+const computeAttributes = async (mood, userId, createDate, updateDate) => {
+	const now = new Date();
+	mood.id = uuid();
+	mood.userId = userId ? userId : 0;
+	mood.createDate = createDate ? createDate : now;
+	mood.updateDate = updateDate ? updateDate : now;
 
-// @Injectable()
-// export class InvestmentProvider {
-// 	investment: Investment;
+	return mood;
+};
 
-// 	async getInvestments() {
-// 		return await getConnection("Diligence")
-// 			.getRepository(Investment)
-// 			.find({ take: 50 });
-// 	}
+@Injectable()
+export class MoodProvider {
+	mood: Mood;
 
-// 	async getInvestmentById(id) {
-// 		return await getConnection("Diligence")
-// 			.getRepository(Investment)
-// 			.findOne(id);
-// 	}
+	async getMoods() {
+		return await getConnection("pocketTherabuddy")
+			.getRepository(Mood)
+			.createQueryBuilder()
+			.getMany();
+	}
 
-// 	async addInvestment(input) {
-// 		const repository = await getConnection("Diligence").getRepository(
-// 			Investment
-// 		);
-// 		const investment = repository.create({ ...input });
-// 		return repository.save(investment);
-// 	}
+	async getMoodById(id) {
+		return await getConnection("pocketTherabuddy")
+			.getRepository(Mood)
+			.findOne(id);
+	}
 
-// 	async updateInvestment(id, input) {
-// 		const repository = await getConnection("Diligence").getRepository(
-// 			Investment
-// 		);
-// 		return repository.update(id, { ...input });
-// 	}
-// }
+	async getMoodByType(type) {
+		return await getConnection("pocketTherabuddy")
+			.getRepository(Mood)
+			.findOne({ where: { type: type } });
+	}
+
+	async getMoodByUser(id) {
+		return await getConnection("pocketTherabuddy")
+			.getRepository(Mood)
+			.findOne({ where: { userId: id } });
+	}
+
+	async createMood({ userId, type, intensity, createDate, updateDate }) {
+		const repository = await getConnection("pocketTherabuddy").getRepository(
+			Mood
+		);
+		debugger;
+		const mood = repository.create({ type, intensity });
+
+		const computedMood = await computeAttributes(
+			mood,
+			userId,
+			createDate,
+			updateDate
+		);
+
+		const savedMood = await repository.save(computedMood);
+
+		console.log(savedMood);
+
+		return savedMood;
+	}
+
+	async updateMood(id, input) {
+		const repository = await getConnection("pocketTherabuddy").getRepository(
+			Mood
+		);
+
+		return repository.update(id, input);
+	}
+
+	async deleteMood(id, userId) {
+		const mood = await getConnection("pocketTherabuddy")
+			.getRepository(Mood)
+			.findOne({ where: { id: id, userId: userId } });
+
+		return await getConnection("pocketTherabuddy")
+			.getRepository(Mood)
+			.remove(mood);
+	}
+}
