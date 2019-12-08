@@ -1,57 +1,13 @@
 import { GraphQLModule, ModuleContext } from "@graphql-modules/core";
 import { MoodProvider } from "./mood.provider";
+const moodEnumModule = require("./moodEnum.module");
+const authenticationModule = require("./authentication.module");
 const gql = require("graphql-tag");
 
 const typeDefs = gql`
-	enum MoodType {
-		AFRAID
-		AGGRAVATED
-		ANGRY
-		ANXIOUS
-		ASHAMED
-		ASSERTIVE
-		BRAVE
-		CALM
-		CAUTIOUS
-		CHEERFUL
-		COMFORTED
-		CONTENTED
-		CURIOUS
-		DEPRESSED
-		EMBARRASSED
-		ENERGIZED
-		ENVIOUS
-		EXCITED
-		FURIOUS
-		GUILTY
-		GRUMPY
-		HAPPY
-		HOPEFUL
-		HUMILIATED
-		HURT
-		INDIFFERENT
-		INSECURE
-		IRRITATED
-		LONELY
-		LOVED
-		MAD
-		OPTIMISTIC
-		OVERWHELMED
-		PANICKED
-		PEACEFUL
-		POSITIVE
-		PROUD
-		RESTLESS
-		REGRETFUL
-		RELIEVED
-		SAD
-		SHAMEFUL
-		SKEPTICAL
-		WORRIED
-	}
 	type Query {
 		moods: [Mood]
-		mood(name: String): Mood
+		mood(type: MoodType): Mood
 		userMoods(userId: Int): [Mood]
 	}
 	type Mood {
@@ -78,28 +34,47 @@ const typeDefs = gql`
 `;
 
 const MoodModule = new GraphQLModule({
+	imports: [moodEnumModule, authenticationModule],
 	typeDefs,
 	providers: [MoodProvider],
 	resolvers: {
 		Query: {
-			moods: (root, args, { injector }: ModuleContext) =>
-				injector.get(MoodProvider).getMoods(),
-			mood: (root, { name }, { injector }: ModuleContext) =>
-				injector.get(MoodProvider).getMoodByName(name),
-			userMoods: (root, { userId }, { injector }: ModuleContext) =>
-				injector.get(MoodProvider).getMoodByUser(userId),
-			createHabit: (
-				root,
-				{ input: attrs },
-				{ currentUser: { id }, injector }: ModuleContext
-			) => injector.get(MoodProvider).createMood(id, { ...attrs }),
+			moods: async (root, args, { injector }: ModuleContext) => {
+				const moods = await injector.get(MoodProvider).getMoods();
+
+				return moods;
+			},
+			mood: async (root, { type }, { injector }: ModuleContext) => {
+				const mood = await injector.get(MoodProvider).getMoodByType(type);
+
+				return mood;
+			},
+			userMoods: async (root, { userId }, { injector }: ModuleContext) => {
+				const userMoods = await injector
+					.get(MoodProvider)
+					.getMoodByUser(userId);
+
+				return userMoods;
+			}
+		},
+		Mutation: {
 			updateMood: (root, { id, input: attrs }, { injector }: ModuleContext) =>
 				injector.get(MoodProvider).updateMood(id, { ...attrs }),
 			deleteMood: (
 				root,
 				{ id },
 				{ currentUser: { id: userId }, injector }: ModuleContext
-			) => injector.get(MoodProvider).deleteMood(id, userId)
+			) => injector.get(MoodProvider).deleteMood(id, userId),
+			createMood: async (
+				root,
+				{ input: { type, intensity, createDate, updateDate } },
+				{ currentUser: { id: userId }, injector }: ModuleContext
+			) => {
+				const newMood = await injector
+					.get(MoodProvider)
+					.createMood({ type, intensity, createDate, updateDate, userId });
+				return newMood;
+			}
 		}
 	}
 });

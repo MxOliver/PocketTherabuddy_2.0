@@ -42,7 +42,9 @@ const HabitModule = new GraphQLModule({
 			habit: (root, { name }, { injector }: ModuleContext) =>
 				injector.get(HabitProvider).getHabitByName(name),
 			userHabits: (root, args, { currentUser, injector }: ModuleContext) =>
-				injector.get(HabitProvider).getHabitsByUser(currentUser.id),
+				injector.get(HabitProvider).getHabitsByUser(currentUser.id)
+		},
+		Mutation: {
 			createHabit: (
 				root,
 				{ input: attrs },

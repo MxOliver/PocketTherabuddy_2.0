@@ -5,6 +5,9 @@
 	"main": "index.ts",
 	"author": "Oliver L Coley",
 	"license": "MIT",
+	"engines": {
+		"node": "12.7.0"
+	},
 	"dependencies": {
 		"@graphql-modules/core": "^0.7.13",
 		"@graphql-modules/di": "^0.7.13",
@@ -13,18 +16,21 @@
 		"apollo-server-express": "^2.9.12",
 		"express": "^4.17.1",
 		"graphql": "^14.5.8",
+		"graphql-request": "^1.8.2",
+		"graphql-tools": "^4.0.6",
 		"jest": "^24.9.0",
-		"jest-extended": "^0.11.2",
 		"knex": "^0.20.3",
 		"pg": "^7.14.0",
+		"ts-jest": "^24.2.0",
 		"ts-node": "^8.5.4",
 		"typeorm": "^0.2.20",
 		"typescript": "^3.7.2",
 		"uuidv4": "^6.0.0"
 	},
 	"scripts": {
-		"dev": "ts-node-dev ./src/index.ts",
-		"debug": "node -r ts-node/register --inspect ./src/index.ts"
+		"dev": "ts-node-dev --respawn --transpileOnly --ignore-watch node_modules ./src/index.ts",
+		"debug": "node -r ts-node/register --inspect ./src/index.ts",
+		"test": "jest"
 	},
 	"devDependencies": {
 		"ts-node-dev": "^1.0.0-pre.44"

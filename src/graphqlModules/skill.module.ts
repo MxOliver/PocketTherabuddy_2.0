@@ -40,7 +40,9 @@ const SkillModule = new GraphQLModule({
 			skill: (root, { name }, { injector }: ModuleContext) =>
 				injector.get(SkillProvider).getSkillByName(name),
 			userSkills: (root, { userId }, { injector }: ModuleContext) =>
-				injector.get(SkillProvider).getSkillsByUser(userId),
+				injector.get(SkillProvider).getSkillsByUser(userId)
+		},
+		Mutation: {
 			createSkill: (
 				root,
 				{ input: attrs },

@@ -2,9 +2,9 @@ import { Entity, Column, PrimaryColumn } from "typeorm";
 
 @Entity({ name: "mood_enum" })
 export class MoodEnum {
-	@PrimaryColumn({ name: "name" })
+	@Column()
 	type: string;
 
-	@Column()
+	@PrimaryColumn()
 	id: number;
 }

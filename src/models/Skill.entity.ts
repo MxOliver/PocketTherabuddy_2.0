@@ -11,7 +11,7 @@ import { User } from "./User.entity";
 
 @Entity({ name: "skills" })
 export class Skill {
-	@PrimaryGeneratedColumn()
+	@PrimaryGeneratedColumn("uuid")
 	id: string;
 
 	@Column()
@@ -24,9 +24,9 @@ export class Skill {
 	@JoinColumn({ name: "user_id" })
 	user: User;
 
-	@CreateDateColumn({ name: "created_at_utc" })
-	createdDate: Date;
+	@Column({ name: "created_at_utc", type: "timestamp" })
+	createdDate: string;
 
-	@UpdateDateColumn({ name: "updated_at_utc" })
-	updatedDate: Date;
+	@Column({ name: "updated_at_utc", type: "timestamp" })
+	updatedDate: string;
 }

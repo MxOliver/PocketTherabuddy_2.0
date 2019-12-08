@@ -4,7 +4,7 @@ function enumTable(table, idType) {
 		.specificType("id", idType || "smallint")
 		.notNullable()
 		.primary();
-	table.string("name").notNullable();
+	table.string("type").notNullable();
 	table.specificType("display_order", "smallint");
 }
 exports.enumTable = enumTable;

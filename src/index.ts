@@ -9,7 +9,9 @@ const app = express();
 
 const server = new ApolloServer({
 	modules: [AppModules],
-	introspection: true
+	introspection: true,
+	playground: true,
+	debug: true
 });
 
 server.applyMiddleware({ app });

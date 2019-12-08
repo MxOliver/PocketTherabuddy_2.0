@@ -8,51 +8,51 @@ const schemaName = "public";
 
 exports.up = async function(knex) {
 	const mood_enum = [
-		{ id: 1, name: "Afraid" },
-		{ id: 2, name: "Aggravated" },
-		{ id: 3, name: "Angry" },
-		{ id: 4, name: "Anxious" },
-		{ id: 5, name: "Ashamed" },
-		{ id: 6, name: "Assertive" },
-		{ id: 7, name: "Brave" },
-		{ id: 8, name: "Calm" },
-		{ id: 9, name: "Cautious" },
-		{ id: 10, name: "Cheerful" },
-		{ id: 11, name: "Comforted" },
-		{ id: 12, name: "Contented" },
-		{ id: 13, name: "Curious" },
-		{ id: 14, name: "Depressed" },
-		{ id: 15, name: "Embarrassed" },
-		{ id: 16, name: "Energized" },
-		{ id: 17, name: "Envious" },
-		{ id: 18, name: "Excited" },
-		{ id: 19, name: "Furious" },
-		{ id: 20, name: "Guilty" },
-		{ id: 21, name: "Grumpy" },
-		{ id: 22, name: "Happy" },
-		{ id: 23, name: "Hopeful" },
-		{ id: 24, name: "Humiliated" },
-		{ id: 25, name: "Hurt" },
-		{ id: 26, name: "Indifferent" },
-		{ id: 27, name: "Insecure" },
-		{ id: 28, name: "Irritated" },
-		{ id: 29, name: "Lonely" },
-		{ id: 30, name: "Loved" },
-		{ id: 31, name: "Mad" },
-		{ id: 32, name: "Optimistic" },
-		{ id: 33, name: "Overwhelmed" },
-		{ id: 34, name: "Panicked" },
-		{ id: 35, name: "Peaceful" },
-		{ id: 36, name: "Positive" },
-		{ id: 37, name: "Proud" },
-		{ id: 38, name: "Restless" },
-		{ id: 39, name: "Regretful" },
-		{ id: 40, name: "Relieved" },
-		{ id: 41, name: "Sad" },
-		{ id: 42, name: "Self-confident" },
-		{ id: 43, name: "Shameful" },
-		{ id: 44, name: "Skeptical" },
-		{ id: 45, name: "Worried" }
+		{ id: 1, type: "AFRAID" },
+		{ id: 2, type: "AGGRAVATED" },
+		{ id: 3, type: "ANGRY" },
+		{ id: 4, type: "ANXIOUS" },
+		{ id: 5, type: "ASHAMED" },
+		{ id: 6, type: "ASSERTIVE" },
+		{ id: 7, type: "BRAVE" },
+		{ id: 8, type: "CALM" },
+		{ id: 9, type: "CAUTIOUS" },
+		{ id: 10, type: "CHEERFUL" },
+		{ id: 11, type: "COMFORTED" },
+		{ id: 12, type: "CONTENTED" },
+		{ id: 13, type: "CURIOUS" },
+		{ id: 14, type: "DEPRESSED" },
+		{ id: 15, type: "EMBARRASSED" },
+		{ id: 16, type: "ENERGIZED" },
+		{ id: 17, type: "ENVIOUS" },
+		{ id: 18, type: "EXCITED" },
+		{ id: 19, type: "FURIOUS" },
+		{ id: 20, type: "GUILTY" },
+		{ id: 21, type: "GRUMPY" },
+		{ id: 22, type: "HAPPY" },
+		{ id: 23, type: "HOPEFUL" },
+		{ id: 24, type: "HUMILIATED" },
+		{ id: 25, type: "HURT" },
+		{ id: 26, type: "INDIFFERENT" },
+		{ id: 27, type: "INSECURE" },
+		{ id: 28, type: "IRRITATED" },
+		{ id: 29, type: "LONELY" },
+		{ id: 30, type: "LOVED" },
+		{ id: 31, type: "MAD" },
+		{ id: 32, type: "OPTIMISTIC" },
+		{ id: 33, type: "OVERWHELMED" },
+		{ id: 34, type: "PANICKED" },
+		{ id: 35, type: "PEACEFUL" },
+		{ id: 36, type: "POSITIVE" },
+		{ id: 37, type: "PROUD" },
+		{ id: 38, type: "RESTLESS" },
+		{ id: 39, type: "REGRETFUL" },
+		{ id: 40, type: "RELIEVED" },
+		{ id: 41, type: "SAD" },
+		{ id: 42, type: "SELFCONFIDENT" },
+		{ id: 43, type: "SHAMEFUL" },
+		{ id: 44, type: "SKEPTICAL" },
+		{ id: 45, type: "WORRIED" }
 	];
 	await knex.schema.withSchema(schemaName).createTable("mood_enum", enumTable);
 	await knex
@@ -70,7 +70,7 @@ exports.up = async function(knex) {
 	await knex.schema.withSchema(schemaName).createTable("moods", table => {
 		entityTable(table);
 		enumReference(table, "mood_enum_id", `${schemaName}.mood_enum`);
-		table.string("name").notNullable();
+		table.string("type").notNullable();
 		table.integer("intensity").notNullable();
 		table
 			.uuid("user_id")
@@ -104,4 +104,10 @@ exports.up = async function(knex) {
 	});
 };
 
-exports.down = async function(knex) {};
+exports.down = async function(knex) {
+	const tables = ["skills", "habits", "users", "moods", "mood_enum"];
+
+	for (let table of tables) {
+		knex.schema.raw(`DROP TABLE ${table}`);
+	}
+};
