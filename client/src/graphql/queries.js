@@ -25,3 +25,12 @@ export const GET_MOODS = gql`
 		}
 	}
 `;
+
+export const GET_MOOD_TYPES = gql`
+	query {
+		moodEnums {
+			id
+			type
+		}
+	}
+`;

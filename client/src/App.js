@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import MoodTacker from "./MoodTacker";
+import MoodTracker from "./MoodTracker/Landing";
+import AddMood from "./MoodTracker";
 import Navigation from "./Navigation/MainNav";
 
 const App = () => {
@@ -9,7 +10,8 @@ const App = () => {
 			<Navigation />
 			<Router>
 				<Switch>
-					<Route path="/mood_tracker" component={MoodTacker} />
+					<Route path="/mood_tracker" component={MoodTracker} />
+					<Route path="/mood_tracker/add" component={AddMood} />
 				</Switch>
 			</Router>
 		</div>

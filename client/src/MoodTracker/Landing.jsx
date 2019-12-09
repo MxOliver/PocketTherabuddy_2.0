@@ -13,20 +13,23 @@ const MoodTracker = () => {
 					<Column alignItems="center">
 						<h1>Mood Tracker</h1>
 						<p>
-							Start tracking your daily moods to begin recognizing patterns in
-							how they change over time.
+							Track your daily moods and view your history to find patterns. You
+							can also see your combined habit and mood history to find insights
+							about how your actions effect your mood.
 						</p>
 					</Column>
 				</Row>
 				<Row justifyContent="center">
 					<Button
 						primary
+						href="/add"
 						label="Log New Mood"
 						icon={<TiPlus />}
 						gapRight="0.5em"
 					/>
 					<Button
 						primary
+						href="/history"
 						label="View Mood History  "
 						icon={<FaChartLine />}
 						gapLeft="0.5em"

@@ -9,6 +9,8 @@
 		"node": "12.7.0"
 	},
 	"dependencies": {
+		"@atlaskit/button": "^13.3.4",
+		"@atlaskit/select": "^11.0.2",
 		"@graphql-modules/core": "^0.7.13",
 		"@graphql-modules/di": "^0.7.13",
 		"@types/jest": "^24.0.23",
@@ -16,11 +18,13 @@
 		"apollo-server": "^2.9.12",
 		"apollo-server-express": "^2.9.12",
 		"express": "^4.17.1",
+		"formik": "^2.0.6",
 		"graphql": "^14.5.8",
 		"graphql-request": "^1.8.2",
 		"graphql-tools": "^4.0.6",
 		"jest": "^24.9.0",
 		"knex": "^0.20.3",
+		"lodash-es": "^4.17.15",
 		"pg": "^7.14.0",
 		"polished": "^3.4.2",
 		"styled-components": "^4.4.1",

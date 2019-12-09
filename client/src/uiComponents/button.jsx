@@ -28,7 +28,7 @@ const Button = styled.button.attrs(props => ({
 
 const ButtonContainer = props => {
 	return (
-		<Button {...props}>
+		<Button href={props.href} {...props}>
 			{props.label} {props.icon ? props.icon : ""}
 		</Button>
 	);
