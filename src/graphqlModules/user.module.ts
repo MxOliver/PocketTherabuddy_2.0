@@ -33,7 +33,9 @@ const UserModule = new GraphQLModule({
 			users: (root, args, { injector }: ModuleContext) =>
 				injector.get(UserProvider).getUsers(),
 			user: (root, { id }, { injector }: ModuleContext) =>
-				injector.get(UserProvider).getUserById(id)
+				injector.get(UserProvider).getUserById(id),
+			currentUser: async (_, args, { currentUser }: ModuleContext) =>
+				currentUser
 		},
 		Mutation: {
 			createUser: (root, { input: attrs }, { injector }: ModuleContext) =>
@@ -43,6 +45,9 @@ const UserModule = new GraphQLModule({
 			deleteUser: (root, { id }, { injector }: ModuleContext) =>
 				injector.get(UserProvider).deleteUser(id)
 		}
+	},
+	context: currentUser => {
+		return currentUser;
 	}
 });
 

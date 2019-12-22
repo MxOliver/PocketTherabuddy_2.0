@@ -1,19 +1,26 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import MoodTracker from "./MoodTracker/Landing";
-import AddMood from "./MoodTracker";
-import Navigation from "./Navigation/MainNav";
+import MoodTrackerLanding from "./MoodTracker";
+import AddMood from "./MoodTracker/Create";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
+import Home from "./Home";
 
 const App = () => {
 	return (
 		<div className="app">
-			<Navigation />
-			<Router>
-				<Switch>
-					<Route path="/mood_tracker" component={MoodTracker} />
-					<Route path="/mood_tracker/add" component={AddMood} />
-				</Switch>
-			</Router>
+			{/* <Navigation /> */}
+			<div className="main">
+				<Router>
+					<Switch>
+						<Route exact path="/" component={Home} />
+						<Route exact path="/sign_in" component={SignIn} />
+						<Route exact path="/sign_up" component={SignUp} />
+						<Route exact path="/mood_tracker" component={MoodTrackerLanding} />
+						<Route exact path="/mood_tracker/add" component={AddMood} />
+					</Switch>
+				</Router>
+			</div>
 		</div>
 	);
 };

@@ -10,6 +10,7 @@ const Column = styled.div`
 	margin-right: ${props => props.gapRight};
 	margin-top: ${props => props.gapTop};
 	margin-bottom: ${props => props.gapBottom};
+	width: ${props => props.width};
 `;
 
 export default Column;

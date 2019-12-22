@@ -30,6 +30,7 @@ const ButtonSelect = ({ value, ...props }) => {
 				className={props.className}
 				name={props.name}
 				data-testid={"button-select"}
+				style={{ marginTop: "1em" }}
 			>
 				<ButtonGroup appearance={props.appearance} id="button_group_label">
 					{props.options.map((option, index) => {
@@ -43,7 +44,7 @@ const ButtonSelect = ({ value, ...props }) => {
 									onClick={() =>
 										props.handleChange({ target: { value: option } })
 									}
-									isSelected={value && option === value}
+									isSelected={value && option.value === value}
 									onBlur={props.onBlur}
 								>
 									{getOptionLabel(option)}

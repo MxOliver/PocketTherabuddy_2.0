@@ -4,9 +4,9 @@ import NavBar, {
 	NavItem,
 	NavLink,
 	NavContainer
-} from "../uiComponents/navigation";
+} from "../UIComponents/navigation";
 import Logo from "../Logo";
-import Row from "../uiComponents/row";
+import Row from "../UIComponents/row";
 
 const Navigation = () => {
 	return (

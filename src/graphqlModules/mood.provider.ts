@@ -3,12 +3,12 @@ import { Injectable } from "@graphql-modules/di";
 import { Mood } from "../models/Mood.entity";
 import { uuid } from "uuidv4";
 
-const computeAttributes = async (mood, userId, createDate, updateDate) => {
+const computeAttributes = async (mood, userId) => {
 	const now = new Date();
 	mood.id = uuid();
-	mood.userId = userId ? userId : 0;
-	mood.createDate = createDate ? createDate : now;
-	mood.updateDate = updateDate ? updateDate : now;
+	mood.user = userId;
+	mood.createDate = now;
+	mood.updateDate = now;
 
 	return mood;
 };
@@ -42,25 +42,17 @@ export class MoodProvider {
 			.findOne({ where: { userId: id } });
 	}
 
-	async createMood({ userId, type, intensity, createDate, updateDate }) {
+	async createMood({ userId, type, intensity }) {
 		const repository = await getConnection("pocketTherabuddy").getRepository(
 			Mood
 		);
-		debugger;
+
 		const mood = repository.create({ type, intensity });
 
-		const computedMood = await computeAttributes(
-			mood,
-			userId,
-			createDate,
-			updateDate
-		);
+		const computedMood = await computeAttributes(mood, userId);
 
-		const savedMood = await repository.save(computedMood);
-
-		console.log(savedMood);
-
-		return savedMood;
+		debugger;
+		return await repository.save(computedMood);
 	}
 
 	async updateMood(id, input) {

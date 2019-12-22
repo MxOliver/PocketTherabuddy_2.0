@@ -1,11 +1,18 @@
 import styled from "styled-components";
+import React from "react";
+import { device } from "../Utils/deviceBreakpoints";
 
 export const NavLink = styled.a`
 	font-family: "Bebas Neue";
 	color: ${props => props.theme.colors.redPrimary};
 	font-size: 20px;
+	padding: 2px 4px 2px 4px;
 	:hover {
 		text-decoration: underline;
+	}
+	:focus {
+		outline: none;
+		background-color: ${props => props.theme.colors.redLight};
 	}
 `;
 
@@ -54,5 +61,19 @@ export const Nav = styled.ul`
 	justify-content: flex-end;
 	padding-right: 5em;
 `;
+
+const MobileNav = styled.a`
+	background-color: ${props => props.theme.colors.blueLight};
+	max-width: 5em;
+	justify-content: flex-end;
+	min-height: 3em;
+	z-index: 9;
+	display: flex;
+	position: relative;
+`;
+
+export const MobileNavMenu = () => {
+	return <MobileNav id="menu-toggle"></MobileNav>;
+};
 
 export default NavBar;

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Bebas+Neue|Gupter&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Bebas+Neue|Gupter|Oswald|Merriweather&display=swap");
 
 body {
 	margin: 0;
@@ -8,13 +8,13 @@ body {
 }
 
 #root {
-	overflow-x: hidden;
+	/*overflow-x: hidden;*/
 	width: 100vw;
 }
 
 code {
 	font-family: "Bebas Neue", cursive;
-	font-family: "Gupter", serif;
+	font-family: "Merriweather", serif;
 }
 
 h1,
@@ -23,15 +23,40 @@ h3,
 h4,
 h5,
 h6,
-button {
+button,
+a {
 	font-family: "Bebas Neue", cursive;
 	margin: 0;
 }
 
 p {
-	font-family: "Gupter", serif;
+	font-family: "Merriweather", serif;
 }
 
-svg {
+/* svg {
 	z-index: 50;
+} */
+
+.gap-bottom-sm {
+	margin-bottom: 1em;
+}
+
+.gap-bottom-md {
+	margin-bottom: 2em;
+}
+
+.gap-top-sm {
+	margin-top: 1em;
+}
+
+.gap-top-md {
+	margin-top: 2em;
+}
+
+.gap-left-sm {
+	margin-left: 1em;
+}
+
+.gap-left-md {
+	margin-left: 2em;
 }

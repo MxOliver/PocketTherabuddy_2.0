@@ -6,6 +6,17 @@ import { User } from "../models/User.entity";
 export class UserProvider {
 	user: User;
 
+	async currentUser(claims) {
+		if (!claims) return;
+
+		const currentUser = {
+			user_id: claims.user_id,
+			username: claims.username,
+			full_name: claims.full_name
+		};
+		return currentUser;
+	}
+
 	async getUsers() {
 		return await getConnection("pocketTherabuddy")
 			.getRepository(User)

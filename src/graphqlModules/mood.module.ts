@@ -39,17 +39,17 @@ const MoodModule = new GraphQLModule({
 	providers: [MoodProvider],
 	resolvers: {
 		Query: {
-			moods: async (root, args, { injector }: ModuleContext) => {
+			moods: async (_, args, { injector }: ModuleContext) => {
 				const moods = await injector.get(MoodProvider).getMoods();
 
 				return moods;
 			},
-			mood: async (root, { type }, { injector }: ModuleContext) => {
+			mood: async (_, { type }, { injector }: ModuleContext) => {
 				const mood = await injector.get(MoodProvider).getMoodByType(type);
 
 				return mood;
 			},
-			userMoods: async (root, { userId }, { injector }: ModuleContext) => {
+			userMoods: async (_, { userId }, { injector }: ModuleContext) => {
 				const userMoods = await injector
 					.get(MoodProvider)
 					.getMoodByUser(userId);
@@ -58,22 +58,21 @@ const MoodModule = new GraphQLModule({
 			}
 		},
 		Mutation: {
-			updateMood: (root, { id, input: attrs }, { injector }: ModuleContext) =>
+			updateMood: (_, { id, input: attrs }, { injector }: ModuleContext) =>
 				injector.get(MoodProvider).updateMood(id, { ...attrs }),
 			deleteMood: (
-				root,
+				_,
 				{ id },
 				{ currentUser: { id: userId }, injector }: ModuleContext
 			) => injector.get(MoodProvider).deleteMood(id, userId),
 			createMood: async (
-				root,
-				{ input: { type, intensity, createDate, updateDate } },
+				_,
+				{ input: { type, intensity } },
 				{ currentUser: { id: userId }, injector }: ModuleContext
 			) => {
-				const newMood = await injector
+				return await injector
 					.get(MoodProvider)
-					.createMood({ type, intensity, createDate, updateDate, userId });
-				return newMood;
+					.createMood({ type, intensity, userId });
 			}
 		}
 	}

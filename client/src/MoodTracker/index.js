@@ -1,15 +1,38 @@
-import { withFormik } from "formik";
-import Form from "./AddMood";
-const moodValidation = {};
+import React from "react";
+import { FaChartLine } from "react-icons/fa";
+import { TiPlus } from "react-icons/ti";
+import { ButtonLink } from "../UIComponents/button";
+import Row from "../UIComponents/row";
+import Column from "../UIComponents/column";
+import { Text, Heading } from "../UIComponents/text";
 
-const AddMoodForm = withFormik({
-	mapPropsToValues: () => ({}),
+const MoodTracker = () => {
+	return (
+		<>
+			<Column>
+				<Row justifyContent="center" gapBottom="2em">
+					<Column alignItems="center" width="55vw">
+						<Heading>Mood Tracker</Heading>
+						<Text align="center">
+							Track your daily moods and view your history to find patterns. You
+							can also see your combined habit and mood history to find insights
+							about how your actions effect your mood.
+						</Text>
+					</Column>
+				</Row>
+				<Row justifyContent="center">
+					<ButtonLink primary href="/mood_tracker/add" gapRight="0.5em">
+						Log New Mood
+						<TiPlus />
+					</ButtonLink>
+					<ButtonLink primary href="/mood_tracker/history" gapLeft="0.5em">
+						Mood History
+						<FaChartLine />
+					</ButtonLink>
+				</Row>
+			</Column>
+		</>
+	);
+};
 
-	validationSchema: moodValidation,
-
-	handleSubmit: values => {
-		console.log(values);
-	}
-})(Form);
-
-export default AddMoodForm;
+export default MoodTracker;
