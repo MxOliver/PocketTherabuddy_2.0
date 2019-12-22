@@ -10,6 +10,7 @@ body {
 #root {
 	/*overflow-x: hidden;*/
 	width: 100vw;
+	color: black;
 }
 
 code {

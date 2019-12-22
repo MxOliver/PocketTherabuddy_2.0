@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import Banner from "./UIComponents/banner";
 import { Button } from "./UIComponents/button";
 import Row from "./UIComponents/row";
@@ -8,6 +7,7 @@ const Home = () => {
 	return (
 		<>
 			<Banner
+				bgColor="#006A82"
 				heading="Pocket Therabuddy"
 				body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 					eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
