@@ -1,7 +1,7 @@
 import React from "react";
 import { FaChartLine } from "react-icons/fa";
 import { TiPlus } from "react-icons/ti";
-import { ButtonLink } from "../UIComponents/button";
+import { Button } from "../UIComponents/button";
 import Row from "../UIComponents/row";
 import Column from "../UIComponents/column";
 import { Text, Heading } from "../UIComponents/text";
@@ -21,14 +21,14 @@ const MoodTracker = () => {
 					</Column>
 				</Row>
 				<Row justifyContent="center">
-					<ButtonLink primary href="/mood_tracker/add" gapRight="0.5em">
+					<Button primary href="/mood_tracker/add" gapRight="0.5em">
 						Log New Mood
 						<TiPlus />
-					</ButtonLink>
-					<ButtonLink primary href="/mood_tracker/history" gapLeft="0.5em">
+					</Button>
+					<Button primary href="/mood_tracker/history" gapLeft="0.5em">
 						Mood History
 						<FaChartLine />
-					</ButtonLink>
+					</Button>
 				</Row>
 			</Column>
 		</>
