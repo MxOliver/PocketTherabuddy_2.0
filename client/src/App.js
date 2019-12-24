@@ -2,8 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MoodTrackerLanding from "./MoodTracker";
 import AddMood from "./MoodTracker/Create";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import { SignIn, SignUp } from "./Users";
 import Home from "./Home";
 
 const App = () => {

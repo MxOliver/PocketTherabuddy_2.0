@@ -1,9 +1,39 @@
-import React from "react";
-import styled from "styled-components";
+import React, { memo, useCallback } from "react";
 import Textfield from "@atlaskit/textfield";
 import Column from "./column";
+import { debounce, isUndefined } from "lodash-es";
 
-export const FormInput = props => {
+export const FormInput = memo(props => {
+	const { handleBlur = () => {}, handleChange = () => {} } = props;
+
+	const debouncedChange = useCallback(debounce(handleChange, 300), [
+		handleChange
+	]);
+
+	const persistAndDebounceChange = useCallback(
+		event => {
+			event.persist();
+			debouncedChange(event);
+		},
+		[debouncedChange]
+	);
+
+	const flushAndBlur = useCallback(
+		(...args) => {
+			debouncedChange.flush();
+			return handleBlur && handleBlur(...args);
+		},
+		[debouncedChange, handleBlur]
+	);
+
+	//Performance improvement if uncontrolled component
+	const InputHandleChange = isUndefined(props.value)
+		? persistAndDebounceChange
+		: handleChange;
+	const InputHandleBlur = isUndefined(props.value)
+		? persistAndDebounceChange
+		: flushAndBlur;
+
 	return (
 		<Column
 			gapLeft="2em"
@@ -22,11 +52,18 @@ export const FormInput = props => {
 			)}
 			<Textfield
 				id="form-field"
-				onChange={props.handleChange}
-				value={props.value}
 				name={props.name}
-				type={props.type}
+				type={props.type ? props.type : "text"}
+				elemAfterInput={props.rightIcon}
+				elemBeforeInput={props.leftIcon}
+				onChange={InputHandleChange}
+				isDisabled={props.isDisabled}
+				onBlur={InputHandleBlur}
+				onFocus={props.handleFocus}
+				defaultValue={props.defaultValue}
+				value={props.value}
+				isRequired={props.isRequired}
 			/>
 		</Column>
 	);
-};
+});
