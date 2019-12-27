@@ -12,7 +12,7 @@ const SubmitHandler = ({ handleSubmit, values, history }) => {
 	// the fields , so this is a work around to prevent the submission of an empty form (no fields touched)
 	const validate = () =>
 		new Promise(resolve => {
-			handleSubmit();
+			//handleSubmit();
 			return setTimeout(resolve, 2000);
 		});
 
@@ -35,7 +35,7 @@ const SubmitHandler = ({ handleSubmit, values, history }) => {
 			});
 	};
 
-	return <ButtonSolid label="Sign In" gapTop="2em" onClick={submitValues} />;
+	return <ButtonSolid label="Sign Up" gapTop="2em" onClick={submitValues} />;
 };
 
 export default withRouter(SubmitHandler);
