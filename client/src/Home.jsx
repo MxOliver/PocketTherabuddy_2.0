@@ -18,9 +18,15 @@ const Home = () => {
 					pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
 					culpa qui officia deserunt mollit anim id est laborum."
 			>
-				<Row justifyContent="center" gapTop="2em">
-					<Button href="/sign_in" label="Sign In" />
-					<Button href="/sign_up" label="Sign Up" />
+				<Row
+					justifyContent="space-evenly"
+					gapTop="2em"
+					gapLeft="auto"
+					gapRight="auto"
+					width="45em"
+				>
+					<Button primary href="/sign_in" label="Sign In" />
+					<Button primary href="/sign_up" label="Sign Up" />
 				</Row>
 			</Banner>
 		</>

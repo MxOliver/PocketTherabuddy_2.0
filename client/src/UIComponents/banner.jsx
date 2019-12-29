@@ -41,7 +41,7 @@ const Banner = ({ heading, body, children, bgColor, color }) => {
 			</UpperEdge>
 			<LowerEdge bgColor={bgColor}>
 				<div
-					style={{ justifyContent: "center", minHeight: "20em", color: color }}
+					style={{ justifyContent: "center", minHeight: "15em", color: color }}
 				>
 					<h1>{heading}</h1>
 					<p>{body}</p>

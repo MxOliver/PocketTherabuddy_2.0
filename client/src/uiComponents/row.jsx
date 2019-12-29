@@ -4,6 +4,7 @@ import { device } from "../Utils/deviceBreakpoints";
 const Row = styled.div`
 	display: flex;
 	flex-direction: row;
+	width: ${props => props.width};
 	justify-content: ${props => props.justifyContent};
 	align-items: ${props => props.alignItems};
 	margin-left: ${props => props.gapLeft};
