@@ -8,6 +8,7 @@ const Home = () => {
 		<>
 			<Banner
 				bgColor="#006A82"
+				color="white"
 				heading="Pocket Therabuddy"
 				body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 					eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

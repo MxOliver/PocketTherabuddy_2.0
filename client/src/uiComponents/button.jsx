@@ -2,17 +2,16 @@ import styled from "styled-components";
 import React from "react";
 
 export const OutlineLink = styled.a.attrs(props => ({
-	bgColor: "transparent",
-	color: "white"
+	bgColor: props.primary ? props.theme.colors.mosaic : props.theme.colors.gold,
+	color: props.primary ? "white" : "black"
 }))`
 	padding-left: 0.1em;
 	padding-right: 0.1em;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
-	background-color: ${props => props.bgColor};
+	background-color: "transparent";
 	width: ${props => props.width};
 	min-width: 8em;
-	margin: 0.5em;
 	color: ${props => props.color};
 	border: 2px solid ${props => props.color};
 	margin-top: ${props => props.gapTop};
@@ -22,14 +21,14 @@ export const OutlineLink = styled.a.attrs(props => ({
 	alignitems: center;
 	text-decoration: none;
 	:hover {
-		color: ${props => props.theme.colors.mosaic};
-		background-color: white;
-		border: 2px solid white;
+		color: ${props => props.bgColor};
+		background-color: ${props => props.color};
+		border: 2px solid ${props => props.color};
 	}
 	:focus {
-		color: ${props => props.theme.colors.mosaic};
-		background-color: white;
-		border: 2px solid white;
+		color: ${props => props.bgColor};
+		background-color: ${props => props.color};
+		border: 2px solid ${props => props.color};
 		outline: none;
 		text-decoration: underline;
 	}
@@ -37,17 +36,22 @@ export const OutlineLink = styled.a.attrs(props => ({
 	font-size: 24px;
 `;
 
-export const ButtonContainer = styled.button`
+export const ButtonContainer = styled.button.attrs(props => ({
+	bgColor: props.primary ? props.theme.colors.mosaic : props.theme.colors.gold,
+	textColor: props.primary ? "white" : "black",
+	accent: props.primary
+		? props.theme.colors.gold
+		: props.theme.colors.terracotta
+}))`
 	padding-left: 0.1em;
 	padding-right: 0.1em;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
-	margin: 0.5em;
-	background-color: ${props => props.theme.colors.mosaic};
+	background-color: ${props => props.bgColor};
 	width: ${props => props.width};
 	min-width: 8em;
 	color: white;
-	border: 2px solid ${props => props.theme.colors.mosaic};
+	border: 2px solid ${props => props.bgColor};
 	margin-top: ${props => props.gapTop};
 	margin-bottom: ${props => props.gapBottom};
 	margin-left: ${props => props.gapLeft};
@@ -56,13 +60,13 @@ export const ButtonContainer = styled.button`
 	letter-spacing: 1px;
 	font-size: 20px;
 	:hover {
-		color: ${props => props.theme.colors.mosaic};
+		color: ${props => props.bgColor};
 		background-color: transparent;
-		border: 2px solid ${props => props.theme.colors.mosaic};
+		border: 2px solid ${props => props.bgColor};
 	}
 	:focus {
 		outline: none;
-		border: 2.5px solid ${props => props.theme.colors.gold};
+		border: 2.5px solid ${props => props.accent};
 	}
 `;
 

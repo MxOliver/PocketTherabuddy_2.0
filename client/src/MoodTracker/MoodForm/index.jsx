@@ -2,6 +2,7 @@ import { withFormik } from "formik";
 import Form from "./Form";
 import React from "react";
 import SubmitHandler from "./SubmitHandler";
+import Row from "../../UIComponents/row";
 
 const MoodForm = withFormik({
 	mapPropsToValues: () => ({
@@ -19,4 +20,11 @@ const MoodForm = withFormik({
 	}
 })(Form);
 
-export default MoodForm;
+const CreateMood = () => {
+	return (
+		<Row gapLeft="5em" gapTop="5em">
+			<MoodForm />
+		</Row>
+	);
+};
+export default CreateMood;

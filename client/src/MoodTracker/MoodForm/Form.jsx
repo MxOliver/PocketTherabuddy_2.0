@@ -1,11 +1,12 @@
 import React from "react";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import { GET_MOOD_TYPES } from "../../graphql/queries";
 import FormSelect from "../../UIComponents/select";
 import ButtonSelect from "../../UIComponents/buttonSelect";
 import SubmitHandler from "./SubmitHandler";
 import Column from "../../UIComponents/column";
 import { get, startCase } from "lodash-es";
+import Spinner from "@atlaskit/spinner";
 
 const Form = ({
 	handleChange,
@@ -16,18 +17,15 @@ const Form = ({
 	values,
 	setFieldTouched
 }) => {
-	const { loading, data: moodTypes, error } = useQuery(GET_MOOD_TYPES);
+	const { loading, data, error } = useQuery(GET_MOOD_TYPES);
 
-	if (loading) return "loading";
-
-	const { moodEnums } = moodTypes;
-	console.log(values);
+	if (loading) return <Spinner size="small" />;
 
 	return (
 		<>
 			<Column alignItems="left">
 				<FormSelect
-					options={moodEnums}
+					options={get(data, "moodEnums", "")}
 					className="single-select"
 					classNamePrefix="react-select"
 					name="type"
@@ -73,7 +71,7 @@ const Form = ({
 					value={get(values, "mood.intensity", "")}
 				/>
 
-				<SubmitHandler values={values} gapTop="2em" />
+				<SubmitHandler values={values} />
 			</Column>
 		</>
 	);

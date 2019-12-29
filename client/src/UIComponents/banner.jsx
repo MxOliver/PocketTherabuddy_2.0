@@ -27,7 +27,7 @@ const UpperEdge = styled.div`
 	}
 `;
 
-const Banner = ({ heading, body, children, bgColor }) => {
+const Banner = ({ heading, body, children, bgColor, color }) => {
 	return (
 		<>
 			<UpperEdge bgColor={bgColor}>
@@ -40,7 +40,9 @@ const Banner = ({ heading, body, children, bgColor }) => {
 				</svg>
 			</UpperEdge>
 			<LowerEdge bgColor={bgColor}>
-				<div style={{ justifyContent: "center", minHeight: "20em" }}>
+				<div
+					style={{ justifyContent: "center", minHeight: "20em", color: color }}
+				>
 					<h1>{heading}</h1>
 					<p>{body}</p>
 					{children}
