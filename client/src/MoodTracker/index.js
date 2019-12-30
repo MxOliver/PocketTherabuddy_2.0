@@ -2,8 +2,6 @@ import React from "react";
 import Banner from "../UIComponents/banner";
 import { Button } from "../UIComponents/button";
 import Row from "../UIComponents/row";
-import Column from "../UIComponents/column";
-import { Text, Heading } from "../UIComponents/text";
 
 const MoodTracker = () => {
 	return (
@@ -20,12 +18,14 @@ const MoodTracker = () => {
 					<Button
 						href="/mood_tracker/add"
 						gapRight="0.5em"
+						bgColor="#EDA931"
 						label="Log New Mood"
 					/>
 
 					<Button
 						href="/mood_tracker/history"
 						gapLeft="0.5em"
+						bgColor="#EDA931"
 						label="Mood History"
 					/>
 				</Row>

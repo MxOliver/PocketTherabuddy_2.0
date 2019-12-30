@@ -25,8 +25,8 @@ const Home = () => {
 					gapRight="auto"
 					width="45em"
 				>
-					<Button primary href="/sign_in" label="Sign In" />
-					<Button primary href="/sign_up" label="Sign Up" />
+					<Button primary href="/sign_in" bgColor="#006A82" label="Sign In" />
+					<Button primary href="/sign_up" bgColor="#006A82" label="Sign Up" />
 				</Row>
 			</Banner>
 		</>

@@ -22,6 +22,7 @@ const LowerEdge = styled.div`
 `;
 const UpperEdge = styled.div`
 	margin: 0;
+	height: 85%;
 	> svg {
 		display: block;
 	}

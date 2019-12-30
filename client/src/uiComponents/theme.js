@@ -7,6 +7,7 @@ const mainTheme = {
 		// blueDark: "#2285a0"
 		mosaic: "#006A82",
 		terracotta: "#CD4D12",
+		strawberry: "#E05745",
 		gold: "#EDA931",
 		peach: "#FED2CD"
 	}

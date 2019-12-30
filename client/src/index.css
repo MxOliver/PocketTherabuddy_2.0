@@ -61,3 +61,34 @@ p {
 .gap-left-md {
 	margin-left: 2em;
 }
+
+/**
+ * Initialiazing a `footnotes` counter on the wrapper
+ */
+.article {
+	counter-reset: footnotes;
+}
+
+a[aria-describedby="footnote-label"] {
+	counter-increment: footnotes;
+	text-decoration: none;
+	color: inherit;
+	cursor: default;
+	outline: none;
+	font-family: "Merriweather", serif;
+}
+
+a[aria-describedby="footnote-label"]::after {
+	content: "[" counter(footnotes) "]";
+	vertical-align: super;
+	font-size: 0.5em;
+	margin-left: 2px;
+	color: #006a82;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+a[aria-describedby="footnote-label"]:focus::after {
+	outline: thin dotted;
+	outline-offset: 2px;
+}

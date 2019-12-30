@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React from "react";
 
 export const OutlineLink = styled.a.attrs(props => ({
-	bgColor: props.primary ? props.theme.colors.mosaic : props.theme.colors.gold,
+	bgColor: props.bgColor ? props.bgColor : props.theme.colors.mosaic,
 	color: props.primary ? "white" : "black"
 }))`
 	padding-left: 0.1em;
@@ -37,11 +37,9 @@ export const OutlineLink = styled.a.attrs(props => ({
 `;
 
 export const ButtonContainer = styled.button.attrs(props => ({
-	bgColor: props.primary ? props.theme.colors.mosaic : props.theme.colors.gold,
+	bgColor: props.bgColor ? props.bgColor : props.theme.colors.mosaic,
 	textColor: props.primary ? "white" : "black",
-	accent: props.primary
-		? props.theme.colors.gold
-		: props.theme.colors.terracotta
+	accent: props.accentColor ? props.accentColor : props.theme.colors.terracotta
 }))`
 	padding-left: 0.1em;
 	padding-right: 0.1em;

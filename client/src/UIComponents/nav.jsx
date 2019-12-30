@@ -1,13 +1,13 @@
-import React from "react";
 import styled from "styled-components";
 
-const NavContainer = styled.div`
+export const NavContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
+	height: 3em;
 `;
 
-const Nav = styled.ul`
+export const Nav = styled.ul`
 	list-style: none;
 	flex-direction: row;
 	display: flex;
@@ -17,7 +17,7 @@ const Nav = styled.ul`
 	padding: 1em;
 `;
 
-const NavLink = styled.a`
+export const NavLink = styled.a`
 	font-family: "Bebas Neue";
 	color: black;
 	font-size: 20px;
@@ -32,37 +32,9 @@ const NavLink = styled.a`
 	}
 `;
 
-const NavItem = styled.li`
+export const NavItem = styled.li`
 	width: fit-content;
 	margin: 0;
 	padding-left: 1.5em;
 	padding-right: 1.5em;
 `;
-
-const NavBar = ({ currentUser }) => {
-	return (
-		<NavContainer>
-			<Nav>
-				<NavItem>
-					<NavLink href="/mood_tracker">Mood Tracker</NavLink>
-				</NavItem>
-				<NavItem>
-					<NavLink href="/habit_tracker">Habit Tracker</NavLink>
-				</NavItem>
-				<NavItem>
-					<NavLink href="/toolbox">ToolBox</NavLink>
-				</NavItem>
-				<NavItem>
-					<NavLink href="/workbook">Workbook</NavLink>
-				</NavItem>
-				{currentUser && (
-					<NavItem>
-						<NavLink href={`/account/${currentUser.id}`}>Account</NavLink>
-					</NavItem>
-				)}
-			</Nav>
-		</NavContainer>
-	);
-};
-
-export default NavBar;
