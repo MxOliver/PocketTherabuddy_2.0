@@ -28,28 +28,6 @@ const ContainerRight = styled.div`
 	text-align: center;
 `;
 
-const List = styled.ol`
-	list-style: none;
-	counter-reset: li;
-	padding-inline-start: 20px;
-	> li::before {
-		content: counter(li);
-		color: ${props => props.theme.colors.mosaic};
-		display: inline-block;
-		width: 1em;
-		margin-left: -1.5em;
-		margin-right: 0.5em;
-		text-align: right;
-		direction: rtl;
-	}
-`;
-
-const Item = styled.li`
-	font-family: "Merriweather";
-	counter-increment: li;
-	font-weight: 600;
-`;
-
 const Workbook = () => {
 	return (
 		<>

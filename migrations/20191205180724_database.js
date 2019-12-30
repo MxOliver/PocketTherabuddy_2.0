@@ -60,6 +60,21 @@ exports.up = async function(knex) {
 		.into("mood_enum")
 		.insert(mood_enum);
 
+	const habit_enum = [
+		{ id: 1, type: "EXERCISE" },
+		{ id: 2, type: "SLEEP" },
+		{ id: 3, type: "SOCIAL_INTERACTION" },
+		{ id: 4, type: "ALONE_TIME" },
+		{ id: 5, type: "TIME_OUTSIDE" },
+		{ id: 6, type: "HYDRATION" },
+		{ id: 7, type: "LEISURE_ACTIVITIES" }
+	];
+	await knex.schema.withSchema(schemaName).createTable("habit_enum", enumTable);
+	await knex
+		.withSchema(schemaName)
+		.into("habit_enum")
+		.insert(habit_enum);
+
 	await knex.schema.withSchema(schemaName).createTable("users", table => {
 		entityTable(table);
 		table.string("name").notNullable();

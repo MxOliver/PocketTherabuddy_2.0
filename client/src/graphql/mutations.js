@@ -8,6 +8,14 @@ export const CREATE_MOOD = gql`
 	}
 `;
 
+export const CREATE_HABIT = gql`
+	mutation CreateHabit($input: HabitInput) {
+		createHabit(input: $input) {
+			type
+		}
+	}
+`;
+
 export const ADD_USER = gql`
 	mutation CreateUser($input: UserInput) {
 		createUser(input: $input) {

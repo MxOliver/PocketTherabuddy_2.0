@@ -5,17 +5,33 @@ import {
 	CreateDateColumn,
 	UpdateDateColumn,
 	ManyToOne,
-	JoinColumn
+	JoinColumn,
+	ManyToMany
 } from "typeorm";
 import { User } from "./User.entity";
+import { HabitEnum } from "./HabitEnum.entity";
+
+export enum HabitType {
+	EXERCISE = "exercise",
+	SLEEP = "sleep",
+	SOCIAL_INTERACTION = "social_interaction",
+	ALONE_TIME = "alone_time",
+	TIME_OUTSIDE = "time_outside",
+	HYDRATION = "hydration",
+	LEISURE_ACTIVITIES = "leisure_activities"
+}
 
 @Entity({ name: "habits" })
 export class Habit {
 	@PrimaryGeneratedColumn("uuid")
 	id: string;
 
-	@Column()
-	name: string;
+	@Column({ type: "enum" })
+	type: HabitType;
+
+	@ManyToMany(type => HabitEnum)
+	@JoinColumn({ name: "habit_enum_id" })
+	habitTypes: HabitEnum;
 
 	@Column()
 	duration: number;
