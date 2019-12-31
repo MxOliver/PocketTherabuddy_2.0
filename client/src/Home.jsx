@@ -1,9 +1,11 @@
 import React from "react";
 import Banner from "./UIComponents/banner";
-import { Button } from "./UIComponents/button";
+import { ButtonOutline } from "./UIComponents/button";
 import Row from "./UIComponents/row";
+import { useAuth0 } from "./auth0-config";
 
 const Home = () => {
+	const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 	return (
 		<>
 			<Banner
@@ -25,8 +27,30 @@ const Home = () => {
 					gapRight="auto"
 					width="45em"
 				>
-					<Button primary href="/sign_in" bgColor="#006A82" label="Sign In" />
-					<Button primary href="/sign_up" bgColor="#006A82" label="Sign Up" />
+					{!isAuthenticated && (
+						<>
+							<ButtonOutline
+								primary
+								onClick={() => loginWithRedirect()}
+								bgColor="#006A82"
+								label="Sign In"
+							/>
+							<ButtonOutline
+								primary
+								//onClick={}
+								bgColor="#006A82"
+								label="Sign Up"
+							/>
+						</>
+					)}
+					{isAuthenticated && (
+						<ButtonOutline
+							primary
+							onClick={() => logout()}
+							bgColor="#006A82"
+							label="Sign Out"
+						/>
+					)}
 				</Row>
 			</Banner>
 		</>

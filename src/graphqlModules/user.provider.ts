@@ -1,6 +1,7 @@
 import { Injectable } from "@graphql-modules/di";
 import { getConnection } from "typeorm";
 import { User } from "../models/User.entity";
+import { webAuth } from "../authConfig";
 
 @Injectable()
 export class UserProvider {
@@ -25,9 +26,33 @@ export class UserProvider {
 	}
 
 	async getUserById(id) {
-		return await getConnection("pocketTherabuddy")
-			.getRepository(User)
-			.findOne(id);
+		// return await getConnection("pocketTherabuddy")
+		// 	.getRepository(User)
+		// 	.findOne(id);
+	}
+
+	async signIn(input) {
+		webAuth.login({
+			realm: "Username-Password-Authentication",
+			email: input.email,
+			password: input.password
+		});
+	}
+
+	async signUp(input) {
+		webAuth.signupAndAuthorize(
+			{
+				connection: "Username-Password-Authentication",
+				email: input.email,
+				password: input.password,
+				user_metadata: { role: "MEMBER" }
+			},
+			async err => {
+				if (err) return err;
+
+				return this.createUser(input);
+			}
+		);
 	}
 
 	async createUser(input) {

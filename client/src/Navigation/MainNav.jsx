@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FaHome } from "react-icons/fa";
 import { IconContext } from "react-icons";
+import { useAuth0 } from "../auth0-config";
 
 const NavRight = styled.div`
 	justify-content: flex-end;
@@ -26,6 +27,23 @@ const Nav = styled.ul`
 	margin-top: 1em;
 	top: 0;
 	padding: 1em;
+`;
+
+const NavButton = styled.button`
+	font-family: "Bebas Neue";
+	color: black;
+	font-size: 20px;
+	text-decoration: none;
+	padding: 2px 4px 2px 4px;
+	background-color: white;
+	border: none;
+	:hover {
+		text-decoration: underline;
+	}
+	:focus {
+		outline: none;
+		background-color: ${props => props.theme.colors.peach};
+	}
 `;
 
 const NavLink = styled.a`
@@ -64,7 +82,8 @@ const NavIcon = styled.a`
 	}
 `;
 
-const NavBar = ({ currentUser }) => {
+const NavBar = () => {
+	const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 	return (
 		<>
 			<NavContainer>
@@ -81,25 +100,34 @@ const NavBar = ({ currentUser }) => {
 				</NavLeft>
 				<NavRight>
 					<Nav>
-						<NavItem>
-							<NavLink href="/mood_tracker">Mood Tracker</NavLink>
-						</NavItem>
-						<NavItem>
-							<NavLink href="/habit_tracker">Habit Tracker</NavLink>
-						</NavItem>
-						<NavItem>
-							<NavLink href="/toolbox">ToolBox</NavLink>
-						</NavItem>
-						<NavItem>
-							<NavLink href="/workbook">Workbook</NavLink>
-						</NavItem>
-						<NavItem>
-							<NavLink href="/dashboard">Dashboard</NavLink>
-						</NavItem>
-						{currentUser && (
+						{!isAuthenticated && (
 							<NavItem>
-								<NavLink href={`/account/${currentUser.id}`}>Account</NavLink>
+								<NavButton onClick={() => loginWithRedirect({})}>
+									Sign In
+								</NavButton>
 							</NavItem>
+						)}
+						{isAuthenticated && (
+							<>
+								<NavItem>
+									<NavLink href="/mood_tracker">Mood Tracker</NavLink>
+								</NavItem>
+								<NavItem>
+									<NavLink href="/habit_tracker">Habit Tracker</NavLink>
+								</NavItem>
+								<NavItem>
+									<NavLink href="/toolbox">ToolBox</NavLink>
+								</NavItem>
+								<NavItem>
+									<NavLink href="/workbook">Workbook</NavLink>
+								</NavItem>
+								<NavItem>
+									<NavLink href="/dashboard">Dashboard</NavLink>
+								</NavItem>
+								<NavItem>
+									<NavButton onClick={() => logout()}>Sign Out</NavButton>
+								</NavItem>
+							</>
 						)}
 					</Nav>
 				</NavRight>

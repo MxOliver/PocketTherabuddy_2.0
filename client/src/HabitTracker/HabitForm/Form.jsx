@@ -17,7 +17,7 @@ const Form = ({
 	values,
 	setFieldTouched
 }) => {
-	if (loading) return <Spinner size="small" />;
+	///if (loading) return <Spinner size="small" />;
 
 	return (
 		<Column alignItems="left">

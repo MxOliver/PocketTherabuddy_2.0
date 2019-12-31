@@ -9,7 +9,42 @@ export const OutlineLink = styled.a.attrs(props => ({
 	padding-right: 0.1em;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
-	background-color: "transparent";
+	background: transparent;
+	width: ${props => props.width};
+	min-width: 8em;
+	color: ${props => props.color};
+	border: 2px solid ${props => props.color};
+	margin-top: ${props => props.gapTop};
+	margin-bottom: ${props => props.gapBottom};
+	margin-left: ${props => props.gapLeft};
+	margin-right: ${props => props.gapRight};
+	alignitems: center;
+	text-decoration: none;
+	:hover {
+		color: ${props => props.bgColor};
+		background-color: ${props => props.color};
+		border: 2px solid ${props => props.color};
+	}
+	:focus {
+		color: ${props => props.bgColor};
+		background-color: ${props => props.color};
+		border: 2px solid ${props => props.color};
+		outline: none;
+		text-decoration: underline;
+	}
+	letter-spacing: 1px;
+	font-size: 24px;
+`;
+
+export const OutlineButton = styled.button.attrs(props => ({
+	bgColor: props.bgColor ? props.bgColor : props.theme.colors.mosaic,
+	color: props.primary ? "white" : "black"
+}))`
+	padding-left: 0.1em;
+	padding-right: 0.1em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	background: transparent;
 	width: ${props => props.width};
 	min-width: 8em;
 	color: ${props => props.color};
@@ -73,6 +108,14 @@ export const Button = props => {
 		<OutlineLink {...props}>
 			{props.label} {props.icon ? props.icon : ""}
 		</OutlineLink>
+	);
+};
+
+export const ButtonOutline = props => {
+	return (
+		<OutlineButton {...props}>
+			{props.label} {props.icon ? props.icon : ""}
+		</OutlineButton>
 	);
 };
 
