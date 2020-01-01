@@ -5,13 +5,15 @@ const gql = require("graphql-tag");
 const typeDefs = gql`
 	type Query {
 		users: [User]
-		user(id: String): User
+		userById(id: String): User
+		userByEmail(email: String): User
 	}
 	type User {
 		id: String
 		name: String
 		email: String
 		password: String
+		salt: String
 	}
 	input UserInput {
 		name: String
@@ -32,8 +34,10 @@ const UserModule = new GraphQLModule({
 		Query: {
 			users: (root, args, { injector }: ModuleContext) =>
 				injector.get(UserProvider).getUsers(),
-			user: (root, { id }, { injector }: ModuleContext) =>
+			userById: (root, { id }, { injector }: ModuleContext) =>
 				injector.get(UserProvider).getUserById(id),
+			userByEmail: (root, { email }, { injector }: ModuleContext) =>
+				injector.get(UserProvider).getUserByEmail(email),
 			currentUser: async (_, args, { currentUser }: ModuleContext) =>
 				currentUser
 		},

@@ -24,6 +24,9 @@ export class User {
 	@Column()
 	password: string;
 
+	@Column()
+	salt: string;
+
 	@OneToMany(
 		type => Mood,
 		mood => mood.user

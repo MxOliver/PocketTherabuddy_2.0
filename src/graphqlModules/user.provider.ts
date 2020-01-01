@@ -1,22 +1,13 @@
 import { Injectable } from "@graphql-modules/di";
 import { getConnection } from "typeorm";
 import { User } from "../models/User.entity";
-import { webAuth } from "../authConfig";
+import { AuthService } from "../middleware/authentication";
 
 @Injectable()
 export class UserProvider {
 	user: User;
 
-	async currentUser(claims) {
-		if (!claims) return;
-
-		const currentUser = {
-			user_id: claims.user_id,
-			username: claims.username,
-			full_name: claims.full_name
-		};
-		return currentUser;
-	}
+	authService = new AuthService();
 
 	async getUsers() {
 		return await getConnection("pocketTherabuddy")
@@ -26,40 +17,28 @@ export class UserProvider {
 	}
 
 	async getUserById(id) {
-		// return await getConnection("pocketTherabuddy")
-		// 	.getRepository(User)
-		// 	.findOne(id);
+		return await getConnection("pocketTherabuddy")
+			.getRepository(User)
+			.findOne(id);
 	}
 
-	async signIn(input) {
-		webAuth.login({
-			realm: "Username-Password-Authentication",
-			email: input.email,
-			password: input.password
-		});
-	}
-
-	async signUp(input) {
-		webAuth.signupAndAuthorize(
-			{
-				connection: "Username-Password-Authentication",
-				email: input.email,
-				password: input.password,
-				user_metadata: { role: "MEMBER" }
-			},
-			async err => {
-				if (err) return err;
-
-				return this.createUser(input);
-			}
-		);
+	async getUserByEmail(email) {
+		return await getConnection("pocketTherabuddy")
+			.getRepository(User)
+			.findOne({ where: { email: email } });
 	}
 
 	async createUser(input) {
 		const repository = await getConnection("pocketTherabuddy").getRepository(
 			User
 		);
-		const user = repository.create({ ...input });
+		const newUser = await this.authService.signUp(input);
+		const user = repository.create({
+			name: newUser.name,
+			email: newUser.email,
+			password: newUser.password,
+			salt: newUser.salt
+		});
 
 		return repository.save(user);
 	}
