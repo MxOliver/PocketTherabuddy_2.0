@@ -2,7 +2,6 @@ import { GraphQLModule, ModuleContext } from "@graphql-modules/core";
 import { HabitProvider } from "./habit.provider";
 const gql = require("graphql-tag");
 const habitEnumModule = require("./habitEnum.module");
-const authenticationModule = require("./authentication.module");
 
 const typeDefs = gql`
 	type Query {
@@ -33,7 +32,7 @@ const typeDefs = gql`
 `;
 
 const HabitModule = new GraphQLModule({
-	imports: [authenticationModule, habitEnumModule],
+	imports: [habitEnumModule],
 	providers: [HabitProvider],
 	typeDefs,
 	resolvers: {

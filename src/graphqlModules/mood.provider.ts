@@ -51,7 +51,6 @@ export class MoodProvider {
 
 		const computedMood = await computeAttributes(mood, userId);
 
-		debugger;
 		return await repository.save(computedMood);
 	}
 

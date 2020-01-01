@@ -1,10 +1,17 @@
-const auth0 = require("auth0-js");
 import * as env from "./envConfig";
+const jwt = require("express-jwt");
 
-export const webAuth = new auth0.WebAuth({
-	domain: env.AUTH0_DOMAIN,
-	clientID: env.AUTH0_CLIENT_ID,
-	audience: `https://dev-oliver.auth0.com/api/v2/`,
-	scope: "read:current_user",
-	responseType: "token id_token profile"
-});
+export const getTokenFromHeader = req => {
+	if (
+		req.headers.authorization &&
+		req.headers.authorization.split(" ")[0] === "Bearer"
+	) {
+		return req.headers.authorization.split(" ")[1];
+	}
+};
+
+// export default jwt({
+// 	secret: env.cookieSecret,
+// 	userProperty: "token",
+// 	getToken: getTokenFromHeader
+// });

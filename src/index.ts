@@ -1,33 +1,45 @@
-import { ApolloServer } from "apollo-server-express";
+import { ApolloServer, AuthenticationError } from "apollo-server-express";
 import { createConnection } from "typeorm";
 const express = require("express");
 const ormConfig = require("../ormconfig.js");
 const AppModules = require("./graphqlModules");
-import { webAuth } from "./authConfig";
-
-const jwt = require("express-jwt");
-const jwks = require("jwks-rsa");
+import { AuthService } from "./middleware/authentication";
+import { UserProvider } from "./graphqlModules/user.provider";
 
 const PORT = 3005;
 
 const app = express();
+const authService = new AuthService();
 
-const jwtCheck = jwt({
-	secret: jwks.expressJwtSecret({
-		cache: true,
-		rateLimit: true,
-		jwksRequestsPerMinute: 5,
-		jwksUri: "https://dev-oliver.auth0.com/.well-known/jwks.json"
-	}),
-	audience: "pockettherabuddy_api",
-	issuer: "https://dev-oliver.auth0.com/",
-	algorithms: ["RS256"]
-});
-
-app.use(jwtCheck);
+const getTokenFromHeader = req => {
+	if (
+		req.headers.authorization &&
+		req.headers.authorization.split(" ")[0] === "Bearer"
+	) {
+		return req.headers.authorization.split(" ")[1];
+	}
+};
 
 const server = new ApolloServer({
 	modules: [AppModules],
+	context: async ({ req }) => {
+		const token = await getTokenFromHeader(req);
+		if (!token) {
+			throw new AuthenticationError("Not authenticated");
+		} else {
+			const verfified = await authService.verifyToken(token);
+
+			if (!verfified) throw new AuthenticationError("Invalid token");
+
+			debugger;
+			let userProvider = new UserProvider();
+
+			const currentUser = await userProvider.getUserByEmail(
+				verfified.claims.email
+			);
+			return currentUser;
+		}
+	},
 	introspection: true,
 	playground: true,
 	debug: true

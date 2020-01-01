@@ -1,7 +1,6 @@
 import { GraphQLModule, ModuleContext } from "@graphql-modules/core";
 import { MoodProvider } from "./mood.provider";
 const moodEnumModule = require("./moodEnum.module");
-const authenticationModule = require("./authentication.module");
 const gql = require("graphql-tag");
 
 const typeDefs = gql`
@@ -34,9 +33,13 @@ const typeDefs = gql`
 `;
 
 const MoodModule = new GraphQLModule({
-	imports: [moodEnumModule, authenticationModule],
+	imports: [moodEnumModule],
 	typeDefs,
 	providers: [MoodProvider],
+	context: (session, currentContext, ModuleSessionInfo) => {
+		debugger;
+		console.log(session);
+	},
 	resolvers: {
 		Query: {
 			moods: async (_, args, { injector }: ModuleContext) => {
