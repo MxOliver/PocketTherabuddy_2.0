@@ -15,12 +15,12 @@ import Workbook from "./Workbook";
 import WorkSheets from "./Workbook/Worksheets";
 import ThoughtReframe from "./Workbook/ThoughtReframe";
 import { useAuth0 } from "./auth0-config";
-import Spinner from "@atlaskit/spinner";
+import Spinner from "./UIComponents/loadingState";
 
 const App = () => {
 	const { loading } = useAuth0();
 
-	if (loading) return <Spinner size="small" />;
+	if (loading) return <Spinner />;
 
 	return (
 		<div className="app">

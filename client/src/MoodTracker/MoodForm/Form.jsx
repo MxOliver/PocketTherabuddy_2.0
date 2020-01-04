@@ -6,7 +6,7 @@ import ButtonSelect from "../../UIComponents/buttonSelect";
 import SubmitHandler from "./SubmitHandler";
 import Column from "../../UIComponents/column";
 import { get, startCase } from "lodash-es";
-import Spinner from "@atlaskit/spinner";
+import LoadingState from "../../UIComponents/loadingState";
 
 const Form = ({
 	handleChange,
@@ -19,7 +19,7 @@ const Form = ({
 }) => {
 	const { loading, data, error } = useQuery(GET_MOOD_TYPES);
 
-	if (loading) return <Spinner size="small" />;
+	if (loading) return <LoadingState />;
 
 	return (
 		<>
