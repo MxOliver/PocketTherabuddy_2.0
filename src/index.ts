@@ -1,5 +1,6 @@
 import { ApolloServer, AuthenticationError } from "apollo-server-express";
 import { createConnection } from "typeorm";
+import * as env from "./envConfig";
 const express = require("express");
 const ormConfig = require("../ormconfig.js");
 const AppModules = require("./graphqlModules");

@@ -1,3 +1,7 @@
 /node_modules
 .env
+<<<<<<< HEAD
 private.key
+=======
+jwt-key
+>>>>>>> 25448cd37f2c42bcb42f006126ca3066d4b00db1
