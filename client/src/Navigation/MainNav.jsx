@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { FaHome } from "react-icons/fa";
 import { IconContext } from "react-icons";
-import { useAuth0 } from "../auth0-config";
 
 const NavRight = styled.div`
 	justify-content: flex-end;
@@ -83,7 +82,6 @@ const NavIcon = styled.a`
 `;
 
 const NavBar = () => {
-	const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 	return (
 		<>
 			<NavContainer>
@@ -100,35 +98,30 @@ const NavBar = () => {
 				</NavLeft>
 				<NavRight>
 					<Nav>
-						{!isAuthenticated && (
+						{/* <NavItem>
+							<NavButton>Sign In</NavButton>
+						</NavItem> */}
+
+						<>
 							<NavItem>
-								<NavButton onClick={() => loginWithRedirect({})}>
-									Sign In
-								</NavButton>
+								<NavLink href="/mood_tracker">Mood Tracker</NavLink>
 							</NavItem>
-						)}
-						{isAuthenticated && (
-							<>
-								<NavItem>
-									<NavLink href="/mood_tracker">Mood Tracker</NavLink>
-								</NavItem>
-								<NavItem>
-									<NavLink href="/habit_tracker">Habit Tracker</NavLink>
-								</NavItem>
-								<NavItem>
-									<NavLink href="/toolbox">ToolBox</NavLink>
-								</NavItem>
-								<NavItem>
-									<NavLink href="/workbook">Workbook</NavLink>
-								</NavItem>
-								<NavItem>
-									<NavLink href="/dashboard">Dashboard</NavLink>
-								</NavItem>
-								<NavItem>
-									<NavButton onClick={() => logout()}>Sign Out</NavButton>
-								</NavItem>
-							</>
-						)}
+							<NavItem>
+								<NavLink href="/habit_tracker">Habit Tracker</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink href="/toolbox">ToolBox</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink href="/workbook">Workbook</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink href="/dashboard">Dashboard</NavLink>
+							</NavItem>
+							{/* <NavItem>
+								<NavButton>Sign Out</NavButton>
+							</NavItem> */}
+						</>
 					</Nav>
 				</NavRight>
 			</NavContainer>

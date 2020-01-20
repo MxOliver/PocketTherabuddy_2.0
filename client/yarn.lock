@@ -108,6 +108,18 @@
     react-transition-group "^2.2.1"
     tslib "^1.9.3"
 
+"@atlaskit/tabs@^11.2.4":
+  version "11.2.4"
+  resolved "https://registry.yarnpkg.com/@atlaskit/tabs/-/tabs-11.2.4.tgz#75b8746a7b56488e83f9ce29b5d4a38a6635de3b"
+  integrity sha512-1v+MZze+U0u5xfkzpGTnK9WosjmPkUX+M6Y8PMpcL63Px6vTI4dyKXcyL7pvgZq1VTXJa4iJXudtLsgX+LOtpg==
+  dependencies:
+    "@atlaskit/analytics-next" "^6.3.1"
+    "@atlaskit/theme" "^9.5.0"
+    classnames "^2.2.5"
+    css-element-queries "^0.3.2"
+    debounce "^1.0.0"
+    tslib "^1.9.3"
+
 "@atlaskit/textfield@^3.1.4":
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/@atlaskit/textfield/-/textfield-3.1.4.tgz#cec0b4843472937a917a261f5abfdad385715a8e"
@@ -122,6 +134,15 @@
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-9.3.0.tgz#751e94aeae389082e970ad6197d2ffd1f15cd26f"
   integrity sha512-NxhANtNaJJD8jozs/J4Yzx4Nvb7xzuEg2c3pB+l6nRsryroYMHoVWgBsqBOlPmP+cswMSXl9Gl/dkIzf3yQNYw==
+  dependencies:
+    exenv "^1.2.2"
+    prop-types "^15.5.10"
+    tslib "^1.9.3"
+
+"@atlaskit/theme@^9.5.0":
+  version "9.5.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-9.5.0.tgz#1bf6f3e39baf7a1a3c1e798d18848bedecdf2107"
+  integrity sha512-xkYdw3AypG5j0sU/RDwHnEn9vL1ISbWCn3K78Zi9y5loRXOLYObpVxIkdNkunUUOVbgzTyHkG+YX6YhKf12fjg==
   dependencies:
     exenv "^1.2.2"
     prop-types "^15.5.10"
@@ -2978,6 +2999,11 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+classnames@^2.2.0, classnames@^2.2.5:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
+  integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
+
 clean-css@4.2.x:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.2.1.tgz#2d411ef76b8569b6d0c84068dabe85b0aa5e5c17"
@@ -3408,6 +3434,11 @@ css-declaration-sorter@^4.0.1:
     postcss "^7.0.1"
     timsort "^0.3.0"
 
+css-element-queries@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/css-element-queries/-/css-element-queries-0.3.2.tgz#535d80891b3af21395d005f19905fe5154b5ccff"
+  integrity sha1-U12AiRs68hOV0AXxmQX+UVS1zP8=
+
 css-has-pseudo@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/css-has-pseudo/-/css-has-pseudo-0.10.0.tgz#3c642ab34ca242c59c41a125df9105841f6966ee"
@@ -3649,6 +3680,11 @@ data-urls@^1.0.0, data-urls@^1.1.0:
     abab "^2.0.0"
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
+
+debounce@^1.0.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.2.0.tgz#44a540abc0ea9943018dc0eaa95cce87f65cd131"
+  integrity sha512-mYtLl1xfZLi1m4RtQYlZgJUNQjl4ZxVnHzIR8nLLgi4q1YT8o/WM+MK/f8yfcc9s5Ir5zRaPZyZU6xs1Syoocg==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
@@ -8705,7 +8741,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -9074,6 +9110,14 @@ react-select@^3.0.4:
     prop-types "^15.6.0"
     react-input-autosize "^2.2.2"
     react-transition-group "^2.2.1"
+
+react-tabs@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/react-tabs/-/react-tabs-3.1.0.tgz#ecc50f034c1d6da2606fab9293055bbc861b382e"
+  integrity sha512-9RKc77HCPsjQDVPyZEw37g3JPtg26oSQ9o4mtaVXjJuLedDX5+TQcE+MRNKR+4aO3GMAY4YslCePGG1//MQ3Jg==
+  dependencies:
+    classnames "^2.2.0"
+    prop-types "^15.5.0"
 
 react-transition-group@^2.2.1:
   version "2.9.0"

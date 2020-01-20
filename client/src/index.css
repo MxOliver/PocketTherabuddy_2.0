@@ -30,6 +30,11 @@ a {
 	margin: 0;
 }
 
+div[role="tablist"] {
+	font-family: "Bebas Neue", cursive;
+	font-size: 1.5rem;
+}
+
 p {
 	font-family: "Merriweather", serif;
 }

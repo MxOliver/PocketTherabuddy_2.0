@@ -12,6 +12,12 @@ const Column = styled.div`
 	margin-bottom: ${props => props.gapBottom};
 	width: ${props => props.width};
 	text-align: ${props => props.textAlign};
+	height: ${props => props.height};
+	min-height: ${props => props.minHeight};
 `;
+
+Column.defaultProps = {
+	width: "100%"
+};
 
 export default Column;

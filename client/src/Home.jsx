@@ -2,10 +2,8 @@ import React from "react";
 import Banner from "./UIComponents/banner";
 import { ButtonOutline } from "./UIComponents/button";
 import Row from "./UIComponents/row";
-import { useAuth0 } from "./auth0-config";
 
 const Home = () => {
-	const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 	return (
 		<>
 			<Banner
@@ -27,30 +25,17 @@ const Home = () => {
 					gapRight="auto"
 					width="45em"
 				>
-					{!isAuthenticated && (
-						<>
-							<ButtonOutline
-								primary
-								onClick={() => loginWithRedirect()}
-								bgColor="#006A82"
-								label="Sign In"
-							/>
-							<ButtonOutline
-								primary
-								//onClick={}
-								bgColor="#006A82"
-								label="Sign Up"
-							/>
-						</>
-					)}
-					{isAuthenticated && (
+					{/* <>
+						<ButtonOutline primary bgColor="#006A82" label="Sign In" />
 						<ButtonOutline
 							primary
-							onClick={() => logout()}
+							//onClick={}
 							bgColor="#006A82"
-							label="Sign Out"
+							label="Sign Up"
 						/>
-					)}
+					</> */}
+
+					{/* <ButtonOutline primary bgColor="#006A82" label="Sign Out" /> */}
 				</Row>
 			</Banner>
 		</>
