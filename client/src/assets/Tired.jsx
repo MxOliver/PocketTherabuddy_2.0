@@ -2,12 +2,12 @@ import React from "react";
 
 function TiredIcon() {
   return (
-    <div style={{ width: "15em" }}>
+    <div style={{ width: "10em" }}>
 
     <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
-      viewBox="0 0 500 500"
+      viewBox="0 0 250 400"
       xmlSpace="preserve"
     >
       <defs>

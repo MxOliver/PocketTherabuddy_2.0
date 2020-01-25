@@ -5,6 +5,7 @@ import { CREATE_MOOD } from "../../graphql/mutations";
 import { mapFormValuesToGraphQL } from "./FormMappingToGraphQL";
 import { ButtonSolid } from "../../UIComponents/button";
 import { withRouter } from "react-router-dom";
+import Row from "../../UIComponents/row";
 
 const SubmitHandler = ({ values, gapTop, handleSubmit, history }) => {
 	const [createMood] = useMutation(CREATE_MOOD);
@@ -30,13 +31,15 @@ const SubmitHandler = ({ values, gapTop, handleSubmit, history }) => {
 	};
 
 	return (
-		<ButtonSolid
-			gapTop="5em"
-			label="Add Mood"
-			onClick={submitValues}
-			gapTop={gapTop}
-			justifyContent="flex-start"
-		/>
+		<Row justifyContent="center">
+			<ButtonSolid
+				gapTop="5em"
+				label="Add Mood"
+				onClick={submitValues}
+				gapTop={gapTop}
+				justifyContent="flex-start"
+			/>
+		</Row>
 	);
 };
 

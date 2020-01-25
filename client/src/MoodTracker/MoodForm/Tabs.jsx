@@ -1,25 +1,14 @@
 import React, { useState } from "react";
 import MoodSelector from "./MoodSelector";
 import IntensitySelector from "./IntensitySelector";
-import styled from "styled-components";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import "react-tabs/style/react-tabs.css";
+import Column from "../../UIComponents/column";
 
 const FormTabs = ({ data, formBag }) => {
 	return (
-		<Tabs>
-			<TabList>
-				<Tab>Select Mood</Tab>
-				<Tab>Rate Intensity</Tab>
-			</TabList>
-
-			<TabPanel>
-				<MoodSelector data={data} formBag={formBag} />
-			</TabPanel>
-			<TabPanel>
-				<IntensitySelector data={data} formBag={formBag} />
-			</TabPanel>
-		</Tabs>
+		<Column justifyContent="center">
+			<MoodSelector data={data} formBag={formBag} />
+			<IntensitySelector data={data} formBag={formBag} />
+		</Column>
 	);
 };
 

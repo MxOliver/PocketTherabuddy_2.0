@@ -7,7 +7,15 @@ const IntensitySelector = ({
 	formBag: { values, setFieldValue, handleChange, errors, touched }
 }) => {
 	return (
-		<div style={{ marginTop: "1em", marginBottom: "1em" }}>
+		<div
+			style={{
+				marginTop: "1em",
+				marginBottom: "5em",
+				justifyContent: "center",
+				marginLeft: "auto",
+				marginRight: "auto"
+			}}
+		>
 			<ButtonSelect
 				options={[
 					{ label: "1", value: 1 },

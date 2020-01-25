@@ -18,7 +18,7 @@ const MoodSelector = ({
 }) => {
 	return (
 		<>
-			<Grid>
+			<Grid justify="center">
 				<Item>
 					<HappyIcon />
 				</Item>

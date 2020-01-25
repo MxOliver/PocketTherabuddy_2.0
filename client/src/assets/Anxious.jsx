@@ -2,8 +2,8 @@ import React from "react";
 
 function AnxiousIcon() {
 	return (
-		<div style={{ width: "15em" }}>
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+		<div style={{ width: "10em" }}>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 400">
 				<defs>
 					<clipPath>
 						<path d="M0 297.875h194.941V0H0z"></path>
