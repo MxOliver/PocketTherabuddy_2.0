@@ -2,6 +2,15 @@ import React from "react";
 import { get, startCase } from "lodash-es";
 import FormSelect from "../../UIComponents/select";
 import Column from "../../UIComponents/column";
+import Row from "../../UIComponents/row";
+import ExcitedIcon from "../../assets/Excited";
+import TiredIcon from "../../assets/Tired";
+import SadIcon from "../../assets/Sad";
+import HappyIcon from "../../assets/Happy";
+import FineIcon from "../../assets/Fine";
+import AngryIcon from "../../assets/Angry";
+import AnxiousIcon from "../../assets/Anxious";
+import { Grid, Item } from "../../UIComponents/grid";
 
 const MoodSelector = ({
 	formBag: { values, setFieldValue, handleChange, errors, touched },
@@ -9,31 +18,26 @@ const MoodSelector = ({
 }) => {
 	return (
 		<>
-			<Column gapTop="2em" gapBottom="1em">
-				<FormSelect
-					options={get(data, "moodEnums", "")}
-					className="single-select"
-					classNamePrefix="react-select"
-					name="type"
-					isSearchable={false}
-					label="Mood"
-					getOptionLabel={option => startCase(option.type.toLowerCase())}
-					getOptionValue={option => option.id}
-					value={get(values, "mood.type", "")}
-					isOptionSelected={option => {
-						return option.id === get(values, "mood.type.moodEnumId");
-					}}
-					handleChange={value => {
-						setFieldValue("mood.type", {
-							moodEnumId: value.id,
-							type: value.type
-						});
-					}}
-					touched={get(touched, ["mood.type"])}
-					error={get(errors, ["mood.type"])}
-					className="gap-bottom-sm gap-top-sm"
-				/>
-			</Column>
+			<Grid>
+				<Item>
+					<HappyIcon />
+				</Item>
+				<Item>
+					<ExcitedIcon />
+				</Item>
+				<Item>
+					<FineIcon />
+				</Item>
+				<Item>
+					<AnxiousIcon />
+				</Item>
+				<Item>
+					<SadIcon />
+				</Item>
+				<Item>
+					<AngryIcon />
+				</Item>
+			</Grid>
 		</>
 	);
 };
