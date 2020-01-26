@@ -6,6 +6,15 @@ import { User } from "../models/User.entity";
 export class UserProvider {
 	user: User;
 
+	computeAttributes = async user => {
+		const now = new Date();
+
+		user.createDate = now;
+		user.updateDate = now;
+
+		return user;
+	};
+
 	async currentUser(claims) {
 		if (!claims) return;
 
@@ -38,7 +47,9 @@ export class UserProvider {
 		);
 		const user = repository.create({ ...input });
 
-		return repository.save(user);
+		const computedUser = await this.computeAttributes(user);
+
+		return repository.save(computedUser);
 	}
 
 	async updateUser(id, input) {

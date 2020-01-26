@@ -2,6 +2,7 @@ import { GraphQLModule, ModuleContext } from "@graphql-modules/core";
 import { MoodProvider } from "./mood.provider";
 const moodEnumModule = require("./moodEnum.module");
 const authenticationModule = require("./authentication.module");
+const userModule = require("./user.module");
 const gql = require("graphql-tag");
 
 const typeDefs = gql`
@@ -13,7 +14,8 @@ const typeDefs = gql`
 	type Mood {
 		id: String
 		type: MoodType
-		userId: Int
+		userId: String
+		user: User
 		intensity: Int
 		createDate: String
 		updateDate: String
@@ -21,7 +23,8 @@ const typeDefs = gql`
 	}
 	input MoodInput {
 		type: MoodType
-		userId: Int
+		userId: String
+		user: UserInput
 		intensity: Int
 		createDate: String
 		updateDate: String
@@ -34,12 +37,12 @@ const typeDefs = gql`
 `;
 
 const MoodModule = new GraphQLModule({
-	imports: [moodEnumModule, authenticationModule],
+	imports: [moodEnumModule, authenticationModule, userModule],
 	typeDefs,
 	providers: [MoodProvider],
 	resolvers: {
 		Query: {
-			moods: async (_, args, { injector }: ModuleContext) => {
+			moods: async (_, args, { injector, currentUser }: ModuleContext) => {
 				const moods = await injector.get(MoodProvider).getMoods();
 
 				return moods;
@@ -68,11 +71,11 @@ const MoodModule = new GraphQLModule({
 			createMood: async (
 				_,
 				{ input: { type, intensity } },
-				{ currentUser: { id: userId }, injector }: ModuleContext
+				{ currentUser, injector }: ModuleContext
 			) => {
 				return await injector
 					.get(MoodProvider)
-					.createMood({ type, intensity, userId });
+					.createMood({ type, intensity, currentUser });
 			}
 		}
 	}

@@ -6,12 +6,14 @@ import { mapFormValuesToGraphQL } from "./FormMappingToGraphQL";
 import { ButtonSolid } from "../../UIComponents/button";
 import { withRouter } from "react-router-dom";
 import Row from "../../UIComponents/row";
+import notify from "../../Utils/notify";
 
 const SubmitHandler = ({ values, gapTop, handleSubmit, history }) => {
 	const [createMood] = useMutation(CREATE_MOOD);
 
 	const afterSubmit = () => {
-		return history.push("/mood_tracker");
+		notify.success({ content: "Mood Successfully Added" });
+		return setTimeout(history.push("/mood_tracker"), 500);
 	};
 
 	const submitValues = async () => {
@@ -31,7 +33,7 @@ const SubmitHandler = ({ values, gapTop, handleSubmit, history }) => {
 	};
 
 	return (
-		<Row justifyContent="center">
+		<Row justifyContent="flex-start">
 			<ButtonSolid
 				gapTop="5em"
 				label="Add Mood"

@@ -10,9 +10,8 @@ const IntensitySelector = ({
 		<div
 			style={{
 				marginTop: "1em",
-				marginBottom: "5em",
+				marginBottom: "1em",
 				justifyContent: "center",
-				marginLeft: "auto",
 				marginRight: "auto"
 			}}
 		>

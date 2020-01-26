@@ -16,8 +16,8 @@ const Column = styled.div`
 	min-height: ${props => props.minHeight};
 `;
 
-Column.defaultProps = {
-	width: "100%"
-};
+// Column.defaultProps = {
+// 	width: "100%"
+// };
 
 export default Column;

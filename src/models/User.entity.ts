@@ -43,8 +43,8 @@ export class User {
 	skills: [Skill];
 
 	@Column({ name: "created_at_utc", type: "timestamp" })
-	createdDate: string;
+	createDate: string;
 
 	@Column({ name: "updated_at_utc", type: "timestamp" })
-	updatedDate: string;
+	updateDate: string;
 }

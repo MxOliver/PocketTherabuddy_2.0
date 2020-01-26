@@ -6,11 +6,20 @@ const FormSelect = memo(props => {
 	if (isEmpty(props.options)) return null;
 	return (
 		<>
-			{props.label ? <label htmlFor="dropdown_label">{props.label}</label> : ""}
+			{props.label ? (
+				<label
+					htmlFor="dropdown_label"
+					style={{ textAlign: `${props.textAlign}` }}
+				>
+					{props.label}
+				</label>
+			) : (
+				""
+			)}
 			<div
 				className={props.className}
 				data-testid="form-select"
-				style={{ width: "50%" }}
+				style={{ minWidth: "25em" }}
 			>
 				<Select
 					name={props.name}

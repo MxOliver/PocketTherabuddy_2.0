@@ -22,7 +22,7 @@ const MoodForm = withFormik({
 
 const CreateMood = () => {
 	return (
-		<Row gapLeft="5em" gapTop="5em">
+		<Row gapLeft="2em" gapRight="2em" gapTop="5em">
 			<MoodForm />
 		</Row>
 	);

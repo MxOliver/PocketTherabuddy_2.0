@@ -12,14 +12,8 @@ const Form = (...formBag) => {
 
 	return (
 		<>
-			<Column
-				alignItems="left"
-				width="100%"
-				gapLeft="1em"
-				gapRight="1em"
-				minHeight="25em"
-			>
-				<FormTabs formBag={formBag} data={data} />
+			<Column alignItems="left" width="100%" gapRight="1em" minHeight="25em">
+				<FormTabs formBag={formBag[0]} data={data} />
 			</Column>
 		</>
 	);

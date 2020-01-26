@@ -25,9 +25,16 @@ h4,
 h5,
 h6,
 button,
+label,
 a {
 	font-family: "Bebas Neue", cursive;
 	margin: 0;
+}
+
+label {
+	font-family: "Bebas Neue", cursive;
+	font-size: 1.5rem;
+	letter-spacing: 1px;
 }
 
 div[role="tablist"] {
