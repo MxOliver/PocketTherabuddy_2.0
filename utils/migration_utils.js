@@ -5,7 +5,6 @@ function enumTable(table, idType) {
 		.notNullable()
 		.primary();
 	table.string("type").notNullable();
-	table.specificType("display_order", "smallint");
 }
 exports.enumTable = enumTable;
 
@@ -25,9 +24,7 @@ exports.enumReference = enumReference;
 /// Adds standard auditing columns
 function audit(table) {
 	table.datetime("created_at_utc", { useTz: false }).notNullable();
-	table.string("created_by").notNullable();
 	table.datetime("updated_at_utc", { useTz: false }).notNullable();
-	table.string("updated_by").notNullable();
 }
 exports.audit = audit;
 

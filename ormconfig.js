@@ -5,5 +5,9 @@ module.exports = {
 	port: 5432,
 	database: "therabuddy_db",
 	username: "olivercoley",
-	entities: ["./src/models/**/*.entity.ts"]
+	entities: ["./src/models/**/*.entity.ts"],
+	migrations: ["seeds/*.ts"],
+	cli: {
+		migrationsDir: "seeds"
+	}
 };

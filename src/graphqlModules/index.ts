@@ -3,8 +3,9 @@ const moodModule = require("./mood.module");
 const userModule = require("./user.module");
 const habitModule = require("./habit.module");
 const skillModule = require("./skill.module");
-const authModule = require("./authentication.module");
 const moodEnumModule = require("./moodEnum.module");
+const habitEnumModule = require("./habitEnum.module");
+const authModule = require("./authentication.module");
 
 module.exports = new GraphQLModule({
 	imports: [
@@ -12,7 +13,8 @@ module.exports = new GraphQLModule({
 		userModule,
 		habitModule,
 		skillModule,
-		authModule,
-		moodEnumModule
+		moodEnumModule,
+		habitEnumModule,
+		authModule
 	]
 });

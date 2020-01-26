@@ -3,12 +3,11 @@ import { Injectable } from "@graphql-modules/di";
 import { Mood } from "../models/Mood.entity";
 import { uuid } from "uuidv4";
 
-const computeAttributes = async (mood, userId, createDate, updateDate) => {
+const computeAttributes = async mood => {
 	const now = new Date();
 	mood.id = uuid();
-	mood.userId = userId ? userId : 0;
-	mood.createDate = createDate ? createDate : now;
-	mood.updateDate = updateDate ? updateDate : now;
+	mood.createDate = now;
+	mood.updateDate = now;
 
 	return mood;
 };
@@ -18,49 +17,48 @@ export class MoodProvider {
 	mood: Mood;
 
 	async getMoods() {
-		return await getConnection("pocketTherabuddy")
+		let moods = await getConnection("pocketTherabuddy")
 			.getRepository(Mood)
-			.createQueryBuilder()
+			.createQueryBuilder("mood")
+			.innerJoinAndSelect("mood.user", "user")
 			.getMany();
+		debugger;
+		return moods;
 	}
 
 	async getMoodById(id) {
 		return await getConnection("pocketTherabuddy")
 			.getRepository(Mood)
-			.findOne(id);
+			.findOne(id, { relations: ["user"] });
 	}
 
 	async getMoodByType(type) {
 		return await getConnection("pocketTherabuddy")
 			.getRepository(Mood)
-			.findOne({ where: { type: type } });
+			.findOne({ where: { type: type }, relations: ["user"] });
 	}
 
 	async getMoodByUser(id) {
 		return await getConnection("pocketTherabuddy")
 			.getRepository(Mood)
-			.findOne({ where: { userId: id } });
+			.findOne({ where: { userId: id }, relations: ["user"] });
 	}
 
-	async createMood({ userId, type, intensity, createDate, updateDate }) {
+	async createMood({ currentUser, type, intensity }) {
 		const repository = await getConnection("pocketTherabuddy").getRepository(
 			Mood
 		);
-		debugger;
+
 		const mood = repository.create({ type, intensity });
 
-		const computedMood = await computeAttributes(
-			mood,
-			userId,
-			createDate,
-			updateDate
-		);
+		mood.user = currentUser;
 
-		const savedMood = await repository.save(computedMood);
+		debugger;
 
-		console.log(savedMood);
+		const computedMood = await computeAttributes(mood);
 
-		return savedMood;
+		debugger;
+		return await repository.save(computedMood);
 	}
 
 	async updateMood(id, input) {

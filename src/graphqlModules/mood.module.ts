@@ -2,6 +2,7 @@ import { GraphQLModule, ModuleContext } from "@graphql-modules/core";
 import { MoodProvider } from "./mood.provider";
 const moodEnumModule = require("./moodEnum.module");
 const authenticationModule = require("./authentication.module");
+const userModule = require("./user.module");
 const gql = require("graphql-tag");
 
 const typeDefs = gql`
@@ -13,7 +14,8 @@ const typeDefs = gql`
 	type Mood {
 		id: String
 		type: MoodType
-		userId: Int
+		userId: String
+		user: User
 		intensity: Int
 		createDate: String
 		updateDate: String
@@ -21,7 +23,8 @@ const typeDefs = gql`
 	}
 	input MoodInput {
 		type: MoodType
-		userId: Int
+		userId: String
+		user: UserInput
 		intensity: Int
 		createDate: String
 		updateDate: String
@@ -34,22 +37,22 @@ const typeDefs = gql`
 `;
 
 const MoodModule = new GraphQLModule({
-	imports: [moodEnumModule, authenticationModule],
+	imports: [moodEnumModule, authenticationModule, userModule],
 	typeDefs,
 	providers: [MoodProvider],
 	resolvers: {
 		Query: {
-			moods: async (root, args, { injector }: ModuleContext) => {
+			moods: async (_, args, { injector, currentUser }: ModuleContext) => {
 				const moods = await injector.get(MoodProvider).getMoods();
 
 				return moods;
 			},
-			mood: async (root, { type }, { injector }: ModuleContext) => {
+			mood: async (_, { type }, { injector }: ModuleContext) => {
 				const mood = await injector.get(MoodProvider).getMoodByType(type);
 
 				return mood;
 			},
-			userMoods: async (root, { userId }, { injector }: ModuleContext) => {
+			userMoods: async (_, { userId }, { injector }: ModuleContext) => {
 				const userMoods = await injector
 					.get(MoodProvider)
 					.getMoodByUser(userId);
@@ -58,22 +61,21 @@ const MoodModule = new GraphQLModule({
 			}
 		},
 		Mutation: {
-			updateMood: (root, { id, input: attrs }, { injector }: ModuleContext) =>
+			updateMood: (_, { id, input: attrs }, { injector }: ModuleContext) =>
 				injector.get(MoodProvider).updateMood(id, { ...attrs }),
 			deleteMood: (
-				root,
+				_,
 				{ id },
 				{ currentUser: { id: userId }, injector }: ModuleContext
 			) => injector.get(MoodProvider).deleteMood(id, userId),
 			createMood: async (
-				root,
-				{ input: { type, intensity, createDate, updateDate } },
-				{ currentUser: { id: userId }, injector }: ModuleContext
+				_,
+				{ input: { type, intensity } },
+				{ currentUser, injector }: ModuleContext
 			) => {
-				const newMood = await injector
+				return await injector
 					.get(MoodProvider)
-					.createMood({ type, intensity, createDate, updateDate, userId });
-				return newMood;
+					.createMood({ type, intensity, currentUser });
 			}
 		}
 	}

@@ -1,24 +1,25 @@
 import { GraphQLModule, ModuleContext } from "@graphql-modules/core";
 import { HabitProvider } from "./habit.provider";
 const gql = require("graphql-tag");
+const habitEnumModule = require("./habitEnum.module");
 const authenticationModule = require("./authentication.module");
 
 const typeDefs = gql`
 	type Query {
 		habits: [Habit]
-		habit(name: String): Habit
+		habit(type: HabitType): Habit
 		userHabits: [Habit]
 	}
 	type Habit {
 		id: String
-		name: String!
+		type: HabitType
 		userId: Int
 		duration: Int
 		createDate: String
 		updateDate: String
 	}
 	input HabitInput {
-		name: String!
+		type: HabitType
 		userId: Int
 		duration: Int
 		createDate: String
@@ -32,7 +33,7 @@ const typeDefs = gql`
 `;
 
 const HabitModule = new GraphQLModule({
-	imports: [authenticationModule],
+	imports: [authenticationModule, habitEnumModule],
 	providers: [HabitProvider],
 	typeDefs,
 	resolvers: {

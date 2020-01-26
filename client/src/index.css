@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css?family=Bebas+Neue|Gupter|Oswald|Merriweather&display=swap");
+
+body {
+	margin: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	width: inherit;
+}
+
+#root {
+	/*overflow-x: hidden;*/
+	width: 100vw;
+	color: black;
+}
+
+code {
+	font-family: "Bebas Neue", cursive;
+	font-family: "Merriweather", serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+label,
+a {
+	font-family: "Bebas Neue", cursive;
+	margin: 0;
+}
+
+label {
+	font-family: "Bebas Neue", cursive;
+	font-size: 1.5rem;
+	letter-spacing: 1px;
+}
+
+div[role="tablist"] {
+	font-family: "Bebas Neue", cursive;
+	font-size: 1.5rem;
+}
+
+p {
+	font-family: "Merriweather", serif;
+}
+
+/* svg {
+	z-index: 50;
+} */
+
+.gap-bottom-sm {
+	margin-bottom: 1em;
+}
+
+.gap-bottom-md {
+	margin-bottom: 2em;
+}
+
+.gap-top-sm {
+	margin-top: 1em;
+}
+
+.gap-top-md {
+	margin-top: 2em;
+}
+
+.gap-left-sm {
+	margin-left: 1em;
+}
+
+.gap-left-md {
+	margin-left: 2em;
+}
+
+/**
+ * Initialiazing a `footnotes` counter on the wrapper
+ */
+.article {
+	counter-reset: footnotes;
+}
+
+a[aria-describedby="footnote-label"] {
+	counter-increment: footnotes;
+	text-decoration: none;
+	color: inherit;
+	cursor: default;
+	outline: none;
+	font-family: "Merriweather", serif;
+}
+
+a[aria-describedby="footnote-label"]::after {
+	content: "[" counter(footnotes) "]";
+	vertical-align: super;
+	font-size: 0.5em;
+	margin-left: 2px;
+	color: #006a82;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+a[aria-describedby="footnote-label"]:focus::after {
+	outline: thin dotted;
+	outline-offset: 2px;
+}

@@ -2,11 +2,10 @@ import {
 	Entity,
 	PrimaryGeneratedColumn,
 	Column,
-	CreateDateColumn,
-	UpdateDateColumn,
 	ManyToOne,
 	JoinColumn,
-	ManyToMany
+	ManyToMany,
+	RelationId
 } from "typeorm";
 import { User } from "./User.entity";
 import { MoodEnum } from "./MoodEnum.entity";
@@ -81,9 +80,12 @@ export class Mood {
 	@JoinColumn({ name: "user_id" })
 	user: User;
 
+	@RelationId((mood: Mood) => mood.user)
+	userId: String;
+
 	@Column({ name: "created_at_utc", type: "timestamp" })
-	createdDate: string;
+	createDate: string;
 
 	@Column({ name: "updated_at_utc", type: "timestamp" })
-	updatedDate: string;
+	updateDate: string;
 }

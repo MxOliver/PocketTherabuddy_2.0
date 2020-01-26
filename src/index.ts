@@ -3,7 +3,8 @@ import { createConnection } from "typeorm";
 const express = require("express");
 const ormConfig = require("../ormconfig.js");
 const AppModules = require("./graphqlModules");
-const PORT = 3000;
+
+const PORT = 3005;
 
 const app = express();
 
